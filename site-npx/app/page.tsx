@@ -1,111 +1,60 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-
-const fullText = "Think. Evaluate. Act.";
+import PasswordGate from "@/components/PasswordGate";
+import ParticleBackground from "@/components/Particles";
+import TypingHeadline from "@/components/TypingHeadline";
 
 export default function Home() {
-  const [displayText, setDisplayText] = useState("");
-  const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-
-  // Typing animation
-  useEffect(() => {
-    let i = 0;
-    const interval = setInterval(() => {
-      setDisplayText(fullText.slice(0, i));
-      i++;
-      if (i > fullText.length) clearInterval(interval);
-    }, 40);
-    return () => clearInterval(interval);
-  }, []);
-
-  const handleSubmit = async () => {
-    setError("");
-    setLoading(true);
-
-    const res = await fetch("/api/auth", {
-      method: "POST",
-      body: JSON.stringify({ password }),
-    });
-
-    setLoading(false);
-
-    if (res.ok) {
-      // Play subtle success sound
-      new Audio("/unlock.mp3").play();
-      window.location.href = "/protected";
-    } else {
-      setError("Access denied");
-    }
-  };
-
   return (
-    <main className="relative min-h-screen bg-black text-white flex items-center justify-center overflow-hidden">
+    <PasswordGate>
+      <main className="relative flex flex-col items-center justify-center min-h-screen text-center px-6 overflow-hidden">
 
-      {/* Animated gradient glow */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute w-[700px] h-[700px] bg-blue-500/20 rounded-full blur-[180px] top-[-150px] left-[-150px] animate-[pulse_6s_ease-in-out_infinite]" />
-        <div className="absolute w-[600px] h-[600px] bg-purple-500/20 rounded-full blur-[180px] bottom-[-150px] right-[-150px] animate-[pulse_7s_ease-in-out_infinite]" />
-        <div className="absolute w-[500px] h-[500px] bg-pink-500/10 rounded-full blur-[160px] top-[40%] left-[30%] animate-[pulse_8s_ease-in-out_infinite]" />
-      </div>
+        {/* 🌐 PARTICLES = SIGNALS */}
+        <ParticleBackground />
 
-      {/* Content */}
-      <div className="relative z-10 text-center max-w-xl px-6">
-
+        {/* 🧠 CONTENT */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="relative z-10"
         >
-
-          {/* <div className="text-xs tracking-widest text-gray-500 mb-4">
-            SYSTEM ACCESS PORTAL
-          </div> */}
-
-          {/* Typing headline */}
-          <h1 className="text-5xl font-semibold mb-6 leading-tight">
-            AI Systems That{" "}
-            <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-              {displayText.replace("AI Systems That ", "")}
+          {/* HEADLINE */}
+          <h1 className="text-5xl md:text-7xl font-semibold tracking-tight leading-tight">
+            <TypingHeadline />
+            <br />
+            <span className="text-offwhite">
+              Before They Act.
             </span>
-            <span className="animate-pulse">|</span>
           </h1>
 
-          <p className="text-gray-400 mb-10">
-            Curated AI systems for reasoning, evaluation, and autonomous decision-making.
-          </p>
+          {/* SUBTEXT */}
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.6 }}
+            className="mt-6 max-w-xl text-slate-300 text-lg"
+          >
+            Perception. Reasoning. Decision-making.
+            <br />
+            Built as systems — not just models.
+          </motion.p>
 
-          <div className="flex flex-col items-center gap-4">
-            <input
-              type="password"
-              placeholder="Enter access code"
-              value={password}
-              autoFocus
-              onChange={(e) => setPassword(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
-              className="px-5 py-3 bg-black/60 border border-gray-700 rounded-lg text-center w-72"
-            />
-
-            <button
-              onClick={handleSubmit}
-              className="px-6 py-3 bg-white text-black rounded-lg"
-              disabled={loading}
-            >
-              {loading ? "Initializing..." : "Enter"}
+          {/* CTA */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 1 }}
+            className="mt-10"
+          >
+            <button className="px-6 py-3 bg-electric text-white rounded-xl shadow-glow hover:scale-105 hover:shadow-[0_0_30px_rgba(0,209,255,0.6)] transition-all duration-300">
+              Enter Demo Lab
             </button>
-
-            {error && <p className="text-red-500 text-sm">{error}</p>}
-          </div>
-
-          <div className="mt-16 text-xs text-gray-600 tracking-widest">
-            AUTHORIZED ACCESS ONLY
-          </div>
-
+          </motion.div>
         </motion.div>
-      </div>
-    </main>
+
+      </main>
+    </PasswordGate>
   );
 }
