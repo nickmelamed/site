@@ -1,19 +1,42 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
+
 import ParticleBackground from "@/components/Particles";
 import TypingHeadline from "@/components/TypingHeadline";
 import InlinePassword from "@/components/InlinePassword";
+import SystemTransition from "@/components/SystemTransition";
 
 export default function Home() {
   const [typingDone, setTypingDone] = useState(false);
+  const [transitioning, setTransitioning] = useState(false);
+
+  const router = useRouter();
+
+  const handleUnlock = () => {
+    document.body.classList.add("system-flash");
+
+    setTimeout(() => {
+      document.body.classList.remove("system-flash");
+    }, 600);
+
+    setTransitioning(true);
+
+    setTimeout(() => {
+      router.push("/demo");
+    }, 1200);
+  };
 
   return (
     <main className="relative flex flex-col items-center justify-center min-h-screen text-center px-6 overflow-hidden">
 
       {/* 🌐 PARTICLES */}
       <ParticleBackground />
+
+      {/* 🔥 TRANSITION OVERLAY */}
+      {transitioning && <SystemTransition />}
 
       <div className="relative z-10">
 
@@ -26,10 +49,13 @@ export default function Home() {
           </span>
         </h1>
 
-        {/* 🔐 PASSWORD (appears after typing) */}
-        <InlinePassword visible={typingDone} />
+        {/* PASSWORD */}
+        <InlinePassword
+          visible={typingDone}
+          onUnlock={handleUnlock}
+        />
 
-        {/* SUBTEXT (animates after typing completes) */}
+        {/* SUBTEXT */}
         <motion.p
           initial={{ opacity: 0, y: 10 }}
           animate={
