@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
-const fullText = "AI Systems That Think. Evaluate. Act.";
+const fullText = "Think. Evaluate. Act.";
 
 export default function Home() {
   const [displayText, setDisplayText] = useState("");
@@ -45,21 +45,11 @@ export default function Home() {
   return (
     <main className="relative min-h-screen bg-black text-white flex items-center justify-center overflow-hidden">
 
-      {/* Particle background */}
-      <div className="absolute inset-0 z-0">
-        {[...Array(40)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute bg-white/10 rounded-full animate-pulse"
-            style={{
-              width: Math.random() * 4 + 2,
-              height: Math.random() * 4 + 2,
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
-              animationDuration: `${2 + Math.random() * 3}s`,
-            }}
-          />
-        ))}
+      {/* Animated gradient glow */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute w-[700px] h-[700px] bg-blue-500/20 rounded-full blur-[180px] top-[-150px] left-[-150px] animate-[pulse_6s_ease-in-out_infinite]" />
+        <div className="absolute w-[600px] h-[600px] bg-purple-500/20 rounded-full blur-[180px] bottom-[-150px] right-[-150px] animate-[pulse_7s_ease-in-out_infinite]" />
+        <div className="absolute w-[500px] h-[500px] bg-pink-500/10 rounded-full blur-[160px] top-[40%] left-[30%] animate-[pulse_8s_ease-in-out_infinite]" />
       </div>
 
       {/* Content */}
@@ -71,13 +61,16 @@ export default function Home() {
           transition={{ duration: 0.8 }}
         >
 
-          <div className="text-xs tracking-widest text-gray-500 mb-4">
+          {/* <div className="text-xs tracking-widest text-gray-500 mb-4">
             SYSTEM ACCESS PORTAL
-          </div>
+          </div> */}
 
           {/* Typing headline */}
           <h1 className="text-5xl font-semibold mb-6 leading-tight">
-            {displayText}
+            AI Systems That{" "}
+            <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+              {displayText.replace("AI Systems That ", "")}
+            </span>
             <span className="animate-pulse">|</span>
           </h1>
 
