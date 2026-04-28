@@ -1,34 +1,54 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
 const demos = [
   {
     name: "Claims RL",
-    description: "Reinforcement learning for evidence selection and claim reasoning.",
-    status: "ACTIVE",
-    link: "/protected/claims-rl",
+    description: "RL-based reasoning engine for claim validation.",
+    details:
+      "Optimizes evidence selection and reasoning strategies via reinforcement learning. Includes reward shaping, debate mechanisms, and uncertainty handling.",
   },
   {
     name: "CoClaims",
-    description: "LLM-based claim evaluation with structured scoring.",
-    status: "ACTIVE",
-    link: "/protected/coclaims",
+    description: "LLM-powered claim evaluation system.",
+    details:
+      "Combines retrieval, structured reasoning, and metric scoring (ESS, ECS, etc.) to evaluate claim validity with explainability.",
   },
   {
     name: "DDGPT",
-    description: "Autonomous due diligence agent for financial analysis.",
-    status: "ACTIVE",
-    link: "/protected/ddgpt",
+    description: "Autonomous due diligence agent.",
+    details:
+      "Processes financial filings and news to generate structured investment insights using RAG pipelines and LLM reasoning.",
   },
 ];
 
-export default function Protected() {
-  const [selected, setSelected] = useState<string | null>(null);
+export default function ControlCenter() {
+  const [selected, setSelected] = useState(demos[0]);
+  const [logs, setLogs] = useState<string[]>([]);
+
+  // Fake system logs
+  useEffect(() => {
+    const messages = [
+      "Initializing system...",
+      "Loading models...",
+      "Connecting to knowledge base...",
+      "System ready.",
+    ];
+
+    let i = 0;
+    const interval = setInterval(() => {
+      setLogs((prev) => [...prev, messages[i]]);
+      i++;
+      if (i >= messages.length) clearInterval(interval);
+    }, 1200);
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
-    <main className="relative min-h-screen bg-black text-white px-8 py-16 overflow-hidden">
+    <main className="relative min-h-screen bg-black text-white overflow-hidden">
 
       {/* Background grid */}
       <div className="absolute inset-0 opacity-10">
@@ -41,73 +61,92 @@ export default function Protected() {
         <div className="absolute w-[500px] h-[500px] bg-purple-500/20 blur-[180px] bottom-[-100px] right-[-100px]" />
       </div>
 
-      {/* Header */}
-      <div className="relative z-10 max-w-6xl mx-auto mb-12">
-        {/* <div className="text-xs tracking-widest text-gray-500 mb-2">
-          AI SYSTEM CONTROL CENTER
-        </div> */}
-        <h1 className="text-4xl font-semibold">
-          Demo Lab
-        </h1>
-        <p className="text-gray-400 mt-2">
-          Interactive modules showcasing applied AI systems.
-        </p>
+      {/* Layout */}
+      <div className="relative z-10 grid grid-cols-12 gap-6 p-8">
+
+        {/* LEFT: MODULES */}
+        <div className="col-span-4 space-y-4">
+          <div className="text-xs text-gray-500 tracking-widest mb-4">
+            MODULES
+          </div>
+
+          {demos.map((demo) => (
+            <motion.div
+              key={demo.name}
+              onClick={() => setSelected(demo)}
+              className={`p-4 rounded-lg border cursor-pointer transition ${
+                selected.name === demo.name
+                  ? "border-blue-500 bg-blue-500/10"
+                  : "border-gray-800 hover:border-gray-500 hover:bg-white/5"
+              }`}
+            >
+              <div className="flex justify-between mb-2 text-xs">
+                <span className="text-gray-500">MODULE</span>
+                <span className="text-green-400">● ACTIVE</span>
+              </div>
+
+              <h2 className="text-lg font-medium">{demo.name}</h2>
+              <p className="text-sm text-gray-400">{demo.description}</p>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* RIGHT: DETAIL PANEL */}
+        <div className="col-span-8 border border-gray-800 rounded-xl p-6 bg-black/40 backdrop-blur">
+
+          <div className="text-xs text-gray-500 tracking-widest mb-2">
+            SYSTEM OVERVIEW
+          </div>
+
+          <h2 className="text-2xl font-semibold mb-4">
+            {selected.name}
+          </h2>
+
+          <p className="text-gray-400 mb-6">
+            {selected.details}
+          </p>
+
+          {/* Fake metrics */}
+          <div className="grid grid-cols-3 gap-4 mb-6">
+            {["Accuracy", "Stability", "Confidence"].map((metric) => (
+              <div
+                key={metric}
+                className="border border-gray-800 p-4 rounded-lg text-center"
+              >
+                <div className="text-xs text-gray-500 mb-2">
+                  {metric.toUpperCase()}
+                </div>
+                <div className="text-xl text-blue-400">
+                  {(Math.random() * 0.3 + 0.7).toFixed(2)}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Launch button */}
+          <button className="px-6 py-3 bg-white text-black rounded-lg hover:bg-gray-200 transition">
+            Launch Module →
+          </button>
+        </div>
       </div>
 
-      {/* Grid */}
-      <div className="relative z-10 max-w-6xl mx-auto grid md:grid-cols-3 gap-8">
+      {/* TERMINAL */}
+      <div className="relative z-10 mx-8 mt-6 border border-gray-800 rounded-lg p-4 bg-black/60 text-sm font-mono text-green-400 h-40 overflow-hidden">
 
-        {demos.map((demo, i) => (
-          <motion.div
-            key={demo.name}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: i * 0.1 }}
-            onClick={() => setSelected(demo.name)}
-            className={`cursor-pointer p-6 rounded-xl border transition ${
-              selected === demo.name
-                ? "border-blue-500 bg-blue-500/10"
-                : "border-gray-800 hover:border-gray-500 hover:bg-white/5"
-            }`}
-          >
+        <div className="text-gray-500 mb-2">SYSTEM LOG</div>
 
-            {/* Status */}
-            <div className="flex justify-between items-center mb-4">
-              <span className="text-xs text-gray-500 tracking-widest">
-                MODULE
-              </span>
-              <span className="text-xs text-green-400">
-                ● {demo.status}
-              </span>
-            </div>
-
-            {/* Title */}
-            <h2 className="text-xl font-medium mb-2">
-              {demo.name}
-            </h2>
-
-            {/* Description */}
-            <p className="text-gray-400 text-sm mb-4">
-              {demo.description}
-            </p>
-
-            {/* Action */}
-            <a
-              href={demo.link}
-              className="text-sm text-blue-400 hover:underline"
-            >
-              Launch →
-            </a>
-
-          </motion.div>
+        {logs.map((log, i) => (
+          <div key={i} className="animate-pulse">
+            &gt; {log}
+          </div>
         ))}
       </div>
 
-      {/* Bottom system bar */}
-      {/* <div className="relative z-10 max-w-6xl mx-auto mt-16 flex justify-between text-xs text-gray-600 tracking-widest">
-        <span>STATUS: ALL SYSTEMS OPERATIONAL</span>
+      {/* FOOTER */}
+      <div className="relative z-10 px-8 py-4 flex justify-between text-xs text-gray-600 tracking-widest">
+        <span>STATUS: OPERATIONAL</span>
         <span>ACCESS LEVEL: AUTHORIZED</span>
-      </div> */}
+      </div>
     </main>
   );
 }
