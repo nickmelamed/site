@@ -1,16 +1,25 @@
 "use client";
 
-import Particles from "react-tsparticles";
-import { loadFull } from "tsparticles";
+import Particles from "@tsparticles/react";
+import { useEffect, useState } from "react";
+import { initParticlesEngine } from "@tsparticles/react";
+import { loadSlim } from "@tsparticles/slim";
 
 export default function ParticleBackground() {
-  const particlesInit = async (main: any) => {
-    await loadFull(main);
-  };
+  const [init, setInit] = useState(false);
+
+  useEffect(() => {
+    initParticlesEngine(async (engine) => {
+      await loadSlim(engine);
+    }).then(() => {
+      setInit(true);
+    });
+  }, []);
+
+  if (!init) return null;
 
   return (
     <Particles
-      init={particlesInit}
       options={{
         background: { color: "transparent" },
         particles: {

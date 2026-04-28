@@ -2,38 +2,39 @@
 
 import { useEffect, useState } from "react";
 
-const phrases = [
-  "Systems That Think.",
-  "Systems That Learn.",
-  "Systems That Decide.",
-];
-
-export default function TypingHeadline() {
+export default function TypingHeadline({
+  onComplete,
+}: {
+  onComplete?: () => void;
+}) {
+  const fullText = "Systems That Think.";
   const [text, setText] = useState("");
-  const [index, setIndex] = useState(0);
-  const [subIndex, setSubIndex] = useState(0);
+  const [done, setDone] = useState(false);
 
   useEffect(() => {
-    if (subIndex < phrases[index].length) {
-      const timeout = setTimeout(() => {
-        setText((prev) => prev + phrases[index][subIndex]);
-        setSubIndex(subIndex + 1);
-      }, 40);
+    let i = 0;
 
-      return () => clearTimeout(timeout);
-    } else {
-      setTimeout(() => {
-        setText("");
-        setSubIndex(0);
-        setIndex((prev) => (prev + 1) % phrases.length);
-      }, 1200);
-    }
-  }, [subIndex, index]);
+    const interval = setInterval(() => {
+      setText(fullText.slice(0, i + 1));
+      i++;
+
+      if (i === fullText.length) {
+        clearInterval(interval);
+        setDone(true);
+
+        setTimeout(() => {
+          onComplete?.();
+        }, 400);
+      }
+    }, 40);
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <span className="text-gradient">
       {text}
-      <span className="animate-pulse">|</span>
+      {!done && <span className="animate-pulse">|</span>}
     </span>
   );
 }

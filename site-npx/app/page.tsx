@@ -1,60 +1,51 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
-import PasswordGate from "@/components/PasswordGate";
 import ParticleBackground from "@/components/Particles";
 import TypingHeadline from "@/components/TypingHeadline";
+import InlinePassword from "@/components/InlinePassword";
 
 export default function Home() {
+  const [typingDone, setTypingDone] = useState(false);
+
   return (
-    <PasswordGate>
-      <main className="relative flex flex-col items-center justify-center min-h-screen text-center px-6 overflow-hidden">
+    <main className="relative flex flex-col items-center justify-center min-h-screen text-center px-6 overflow-hidden">
 
-        {/* 🌐 PARTICLES = SIGNALS */}
-        <ParticleBackground />
+      {/* 🌐 PARTICLES */}
+      <ParticleBackground />
 
-        {/* 🧠 CONTENT */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="relative z-10"
+      <div className="relative z-10">
+
+        {/* HEADLINE */}
+        <h1 className="text-5xl md:text-7xl font-semibold tracking-tight leading-tight">
+          <TypingHeadline onComplete={() => setTypingDone(true)} />
+          <br />
+          <span className="text-offwhite">
+            Before They Act.
+          </span>
+        </h1>
+
+        {/* 🔐 PASSWORD (appears after typing) */}
+        <InlinePassword visible={typingDone} />
+
+        {/* SUBTEXT (animates after typing completes) */}
+        <motion.p
+          initial={{ opacity: 0, y: 10 }}
+          animate={
+            typingDone
+              ? { opacity: 1, y: 0 }
+              : { opacity: 0, y: 10 }
+          }
+          transition={{ duration: 0.6 }}
+          className="mt-8 max-w-xl text-slate-300 text-lg"
         >
-          {/* HEADLINE */}
-          <h1 className="text-5xl md:text-7xl font-semibold tracking-tight leading-tight">
-            <TypingHeadline />
-            <br />
-            <span className="text-offwhite">
-              Before They Act.
-            </span>
-          </h1>
+          Perception. Reasoning. Decision-making.
+          <br />
+          Built as systems — not just models.
+        </motion.p>
 
-          {/* SUBTEXT */}
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.6 }}
-            className="mt-6 max-w-xl text-slate-300 text-lg"
-          >
-            Perception. Reasoning. Decision-making.
-            <br />
-            Built as systems — not just models.
-          </motion.p>
-
-          {/* CTA */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 1 }}
-            className="mt-10"
-          >
-            <button className="px-6 py-3 bg-electric text-white rounded-xl shadow-glow hover:scale-105 hover:shadow-[0_0_30px_rgba(0,209,255,0.6)] transition-all duration-300">
-              Enter Demo Lab
-            </button>
-          </motion.div>
-        </motion.div>
-
-      </main>
-    </PasswordGate>
+      </div>
+    </main>
   );
 }
