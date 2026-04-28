@@ -49,37 +49,30 @@ export default function ControlCenter() {
   const [selected, setSelected] = useState<any | null>(null);
 
   return (
-    <main className="relative min-h-screen bg-black text-white overflow-hidden p-8">
+    <main className="relative min-h-screen bg-navy text-offwhite overflow-hidden p-8">
 
+      {/* 🌐 Background System Layers */}
+      <div className="absolute inset-0 bg-hero-gradient opacity-80" />
+      <div className="absolute inset-0 bg-glow-radial animate-pulseGlow" />
+      <div className="absolute inset-0 grid-overlay opacity-20" />
+
+      {/* HEADER */}
       <div className="relative z-10 max-w-6xl mx-auto mb-8 flex justify-between items-center">
 
-      {/* Left: Title */}
-      <div>
-        <div className="text-xs text-gray-500 tracking-widest">
-          AI SYSTEM CONTROL CENTER
+        <div>
+          <div className="text-xs text-offwhite/50 tracking-widest">
+            AI SYSTEM CONTROL CENTER
+          </div>
+          <h1 className="text-2xl font-semibold text-gradient">
+            Demo Lab
+          </h1>
         </div>
-        <h1 className="text-2xl font-semibold">
-          Demo Lab
-        </h1>
-      </div>
 
-      {/* Right: Status */}
-      <div className="text-xs text-gray-500 tracking-widest text-right">
-        <div>STATUS: OPERATIONAL</div>
-        <div>ACCESS: AUTHORIZED</div>
-      </div>
+        <div className="text-xs text-offwhite/50 tracking-widest text-right">
+          <div>STATUS: <span className="text-cyan">OPERATIONAL</span></div>
+          <div>ACCESS: <span className="text-cyan">AUTHORIZED</span></div>
+        </div>
 
-    </div>
-
-      {/* Background grid */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="w-full h-full bg-[linear-gradient(to_right,#ffffff10_1px,transparent_1px),linear-gradient(to_bottom,#ffffff10_1px,transparent_1px)] bg-[size:40px_40px]" />
-      </div>
-
-      {/* Glow */}
-      <div className="absolute inset-0">
-        <div className="absolute w-[600px] h-[600px] bg-blue-500/20 blur-[180px] top-[-100px] left-[-100px]" />
-        <div className="absolute w-[500px] h-[500px] bg-purple-500/20 blur-[180px] bottom-[-100px] right-[-100px]" />
       </div>
 
       {/* MODULE GRID */}
@@ -90,19 +83,24 @@ export default function ControlCenter() {
             key={demo.name}
             whileHover={{ scale: 1.03 }}
             onClick={() => setSelected(demo)}
-            className="relative group cursor-pointer border border-gray-800 p-5 rounded-xl overflow-hidden"
+            className="relative group cursor-pointer border border-white/10 p-5 rounded-xl overflow-hidden bg-charcoal/60 backdrop-blur"
           >
             {/* Hover glow */}
-            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition bg-gradient-to-r from-blue-500/10 to-purple-500/10 blur-xl" />
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition bg-gradient-to-r from-electric/10 to-indigo/10 blur-xl" />
 
             <div className="relative z-10">
               <div className="flex justify-between text-xs mb-2">
-                <span className="text-gray-500">MODULE</span>
-                <span className="text-green-400">● ACTIVE</span>
+                <span className="text-offwhite/50">MODULE</span>
+                <span className="text-cyan">● ACTIVE</span>
               </div>
 
-              <h2 className="text-lg font-medium mb-1">{demo.name}</h2>
-              <p className="text-gray-400 text-sm">{demo.description}</p>
+              <h2 className="text-lg font-medium mb-1">
+                {demo.name}
+              </h2>
+
+              <p className="text-offwhite/60 text-sm">
+                {demo.description}
+              </p>
             </div>
           </motion.div>
         ))}
@@ -112,60 +110,68 @@ export default function ControlCenter() {
       <AnimatePresence>
         {selected && (
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 40 }}
-            className="fixed inset-0 bg-black/90 backdrop-blur-lg z-20 flex items-center justify-center px-6"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-20 flex items-center justify-center px-6"
           >
-            <div className="max-w-4xl w-full border border-gray-800 rounded-xl p-8 bg-black">
+            {/* Background */}
+            <div className="absolute inset-0 bg-navy/90 backdrop-blur-xl" />
+
+            <motion.div
+              initial={{ scale: 0.95, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.95, y: 20 }}
+              className="relative z-10 max-w-4xl w-full border border-white/10 rounded-xl p-8 bg-charcoal/90"
+            >
 
               {/* Close */}
               <div className="flex justify-between mb-6">
-                <h2 className="text-2xl font-semibold">
+                <h2 className="text-2xl font-semibold text-gradient">
                   {selected.name}
                 </h2>
                 <button
                   onClick={() => setSelected(null)}
-                  className="text-gray-500 hover:text-white"
+                  className="text-offwhite/50 hover:text-offwhite"
                 >
                   ✕
                 </button>
               </div>
 
               {/* Description */}
-              <p className="text-gray-400 mb-8">
+              <p className="text-offwhite/60 mb-8">
                 {selected.details}
               </p>
 
-              {/* Architecture preview */}
+              {/* Architecture */}
               <div className="mb-8">
-                <div className="text-xs text-gray-500 tracking-widest mb-4">
+                <div className="text-xs text-offwhite/50 tracking-widest mb-4">
                   SYSTEM ARCHITECTURE
                 </div>
 
                 <div className="flex items-center gap-3 flex-wrap">
                   {selected.architecture.map((step: string, i: number) => (
                     <div key={i} className="flex items-center gap-3">
-                      <div className="px-3 py-2 border border-gray-700 rounded-lg text-sm bg-white/5">
+                      <div className="px-3 py-2 border border-white/10 rounded-lg text-sm bg-white/5">
                         {step}
                       </div>
                       {i !== selected.architecture.length - 1 && (
-                        <span className="text-gray-500">→</span>
+                        <span className="text-offwhite/40">→</span>
                       )}
                     </div>
                   ))}
                 </div>
               </div>
 
-              {/* Fake metrics */}
+              {/* Metrics */}
               <div className="grid grid-cols-3 gap-4 mb-8">
                 {["Accuracy", "Confidence", "Stability"].map((m) => (
                   <div
                     key={m}
-                    className="border border-gray-800 p-4 rounded-lg text-center"
+                    className="border border-white/10 p-4 rounded-lg text-center bg-white/5"
                   >
-                    <div className="text-xs text-gray-500 mb-1">{m}</div>
-                    <div className="text-blue-400 text-lg">
+                    <div className="text-xs text-offwhite/50 mb-1">{m}</div>
+                    <div className="text-electric text-lg">
                       {(Math.random() * 0.3 + 0.7).toFixed(2)}
                     </div>
                   </div>
@@ -173,14 +179,15 @@ export default function ControlCenter() {
               </div>
 
               {/* Launch */}
-              <button className="px-6 py-3 bg-white text-black rounded-lg hover:bg-gray-200">
+              <button className="px-6 py-3 bg-electric text-white rounded-lg shadow-glow hover:scale-105 transition">
                 Launch Interactive Demo →
               </button>
 
-            </div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
+
     </main>
   );
 }
