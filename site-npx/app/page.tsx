@@ -25,7 +25,7 @@ export default function Home() {
     setTransitioning(true);
 
     setTimeout(() => {
-      router.push("/demo");
+      router.push("/demo-lab");
     }, 1200);
   };
 

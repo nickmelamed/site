@@ -1,0 +1,78 @@
+"use client";
+
+import { DemoRun } from "@/demos/types";
+
+export default function DemoRunner({ run }: { run: DemoRun }) {
+  return (
+    <div className="space-y-8">
+
+      {/* INPUT */}
+      <div className="bg-charcoal/60 p-4 rounded-xl border border-white/10">
+        <div className="text-xs text-offwhite/50 mb-2">INPUT</div>
+        <h3 className="text-lg font-medium">{run.input.title}</h3>
+        <p className="text-offwhite/60 text-sm mt-1">
+          {run.input.content}
+        </p>
+      </div>
+
+      {/* PIPELINE */}
+      <div>
+        <div className="text-xs text-offwhite/50 mb-3">
+          PIPELINE
+        </div>
+
+        <div className="flex flex-wrap gap-3 items-center">
+          {run.steps.map((step, i) => (
+            <div key={i} className="flex items-center gap-3">
+              <div className="px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-sm">
+                {step.name}
+              </div>
+              {i !== run.steps.length - 1 && (
+                <span className="text-offwhite/40">→</span>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* OUTPUT */}
+      <div className="bg-charcoal/60 p-4 rounded-xl border border-white/10">
+        <div className="text-xs text-offwhite/50 mb-2">
+          OUTPUT
+        </div>
+
+        {run.output.type === "text" && (
+          <p className="text-offwhite/80 whitespace-pre-line">
+            {run.output.content}
+          </p>
+        )}
+
+        {run.output.type === "log" && (
+          <div className="font-mono text-sm text-cyan space-y-1">
+            {run.output.content.map((line: string, i: number) => (
+              <div key={i}>› {line}</div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* METRICS */}
+      <div className="grid grid-cols-3 gap-4">
+        {run.metrics.map((m, i) => (
+          <div
+            key={i}
+            className="bg-white/5 border border-white/10 p-4 rounded-lg text-center"
+          >
+            <div className="text-xs text-offwhite/50">
+              {m.name}
+            </div>
+            <div className="text-electric text-lg">
+              {m.value.toFixed(2)}
+            </div>
+          </div>
+        ))}
+      </div>
+
+    </div>
+  );
+}
