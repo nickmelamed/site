@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 import { demoRegistry, DemoKey } from "@/demos/registry";
 import DemoRunner from "@/components/demo/DemoRunner";
 
-const demos = Object.values(demoRegistry);
+const demos = Object.entries(demoRegistry);
 
 export default function ControlCenter() {
   const router = useRouter();
@@ -18,10 +18,20 @@ export default function ControlCenter() {
 
   const [mode, setMode] = useState<"preview" | "run">("preview");
 
-  // ✅ Reset to preview when a new demo is selected
+  // ✅ Reset mode when switching demos
   useEffect(() => {
     setMode("preview");
   }, [selected]);
+
+  // REUSABLE HELPERS
+  const openDemo = (id: DemoKey) => {
+    setMode("preview");
+    router.push(`?demo=${id}`, { scroll: false });
+  };
+
+  const closeDemo = () => {
+    router.push("?", { scroll: false }); // removes ?demo param cleanly
+  };
 
   return (
     <main className="relative min-h-screen bg-navy text-offwhite overflow-hidden p-8">
@@ -37,8 +47,9 @@ export default function ControlCenter() {
           Demo Lab
         </h1>
 
+        {/* Back to landing */}
         <button
-          onClick={() => router.back()}
+          onClick={() => router.push("/")}
           className="text-offwhite/50 hover:text-offwhite text-sm"
         >
           ← Back
@@ -58,12 +69,12 @@ export default function ControlCenter() {
 
       {/* MODULE GRID */}
       <div className="relative z-10 max-w-6xl mx-auto grid md:grid-cols-3 gap-6">
-        {demos.map((demo) => (
+        {demos.map(([key, demo]) => (
           <motion.div
-            key={demo.id}
+            key={key}
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.98 }}
-            onClick={() => router.push(`?demo=${demo.id}`, { scroll: false })}
+            onClick={() => openDemo(demo.id as DemoKey)}
             className="relative group cursor-pointer border border-white/10 p-5 rounded-xl bg-charcoal/60 backdrop-blur"
           >
             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition bg-gradient-to-r from-electric/10 to-indigo/10 blur-xl" />
@@ -119,8 +130,9 @@ export default function ControlCenter() {
                   {run.name}
                 </h2>
 
+                {/* 🔥 FIXED CLOSE BUTTON */}
                 <button
-                  onClick={() => router.push("/demo", { scroll: false })}
+                  onClick={closeDemo}
                   className="text-offwhite/50 hover:text-offwhite"
                 >
                   ✕
