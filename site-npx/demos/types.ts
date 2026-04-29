@@ -10,7 +10,8 @@ export type DemoRun = {
 
   steps: {
     name: string;
-    description?: string;
+    duration?: number; // (ms)
+    logs?: string[];
   }[];
 
   output: {

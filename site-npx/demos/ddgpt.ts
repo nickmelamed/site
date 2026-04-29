@@ -11,11 +11,22 @@ export const ddgptRun: DemoRun = {
   },
 
   steps: [
-    { name: "Document Ingestion" },
-    { name: "Parsing" },
-    { name: "RAG Pipeline" },
-    { name: "LLM Synthesis" },
-  ],
+  {
+    name: "Document Ingestion",
+    duration: 800,
+    logs: ["Loading filings...", "Parsing documents..."],
+  },
+  {
+    name: "RAG Pipeline",
+    duration: 1200,
+    logs: ["Embedding chunks...", "Retrieving relevant context..."],
+  },
+  {
+    name: "LLM Synthesis",
+    duration: 1500,
+    logs: ["Generating memo...", "Refining output..."],
+  },
+],
 
   output: {
     type: "text",

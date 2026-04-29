@@ -2,7 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { demoRegistry, DemoKey } from "@/demos/registry";
 import DemoRunner from "@/components/demo/DemoRunner";
@@ -16,8 +16,12 @@ export default function ControlCenter() {
   const selected = searchParams.get("demo") as DemoKey | null;
   const run = selected && demoRegistry[selected] ? demoRegistry[selected] : null;
 
-  // 👇 NEW: controls preview vs execution
   const [mode, setMode] = useState<"preview" | "run">("preview");
+
+  // ✅ Reset to preview when a new demo is selected
+  useEffect(() => {
+    setMode("preview");
+  }, [selected]);
 
   return (
     <main className="relative min-h-screen bg-navy text-offwhite overflow-hidden p-8">
@@ -54,16 +58,12 @@ export default function ControlCenter() {
 
       {/* MODULE GRID */}
       <div className="relative z-10 max-w-6xl mx-auto grid md:grid-cols-3 gap-6">
-
         {demos.map((demo) => (
           <motion.div
             key={demo.id}
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.98 }}
-            onClick={() => {
-              setMode("preview"); // reset mode
-              router.push(`?demo=${demo.id}`, { scroll: false });
-            }}
+            onClick={() => router.push(`?demo=${demo.id}`, { scroll: false })}
             className="relative group cursor-pointer border border-white/10 p-5 rounded-xl bg-charcoal/60 backdrop-blur"
           >
             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition bg-gradient-to-r from-electric/10 to-indigo/10 blur-xl" />
@@ -120,14 +120,14 @@ export default function ControlCenter() {
                 </h2>
 
                 <button
-                  onClick={() => router.back()}
+                  onClick={() => router.push("/demo", { scroll: false })}
                   className="text-offwhite/50 hover:text-offwhite"
                 >
                   ✕
                 </button>
               </div>
 
-              {/* PREVIEW MODE */}
+              {/* PREVIEW */}
               {mode === "preview" && (
                 <div>
 
@@ -135,7 +135,7 @@ export default function ControlCenter() {
                     {run.description}
                   </p>
 
-                  {/* Architecture */}
+                  {/* SYSTEM FLOW */}
                   <div className="mb-8">
                     <div className="text-xs text-offwhite/50 mb-3">
                       SYSTEM FLOW
@@ -155,7 +155,7 @@ export default function ControlCenter() {
                     </div>
                   </div>
 
-                  {/* Metrics */}
+                  {/* METRICS */}
                   <div className="grid grid-cols-3 gap-4 mb-8">
                     {run.metrics.map((m, i) => (
                       <div
@@ -170,9 +170,16 @@ export default function ControlCenter() {
                     ))}
                   </div>
 
-                  {/* Run Button */}
+                  {/* RUN BUTTON */}
                   <button
-                    onClick={() => setMode("run")}
+                    onClick={() => {
+                      document.body.classList.add("system-flash");
+
+                      setTimeout(() => {
+                        document.body.classList.remove("system-flash");
+                        setMode("run");
+                      }, 400);
+                    }}
                     className="px-6 py-3 bg-electric text-white rounded-lg shadow-glow hover:scale-105 transition"
                   >
                     Run Demo →
@@ -180,15 +187,14 @@ export default function ControlCenter() {
                 </div>
               )}
 
-              {/* RUN MODE */}
+              {/* RUN */}
               {mode === "run" && (
-                <div>
-                  <div className="mb-6 text-sm text-offwhite/60">
-                    INPUT: {run.input.title}
-                  </div>
-
-                  <DemoRunner run={run} />
-                </div>
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                >
+                  <DemoRunner run={run} active={true} />
+                </motion.div>
               )}
 
             </motion.div>
