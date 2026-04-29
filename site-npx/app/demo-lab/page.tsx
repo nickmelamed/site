@@ -1,18 +1,23 @@
 "use client";
 
-import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useState } from "react";
 
-import { demoRegistry } from "@/demos/registry";
-import { DemoKey } from "@/demos/registry";
+import { demoRegistry, DemoKey } from "@/demos/registry";
 import DemoRunner from "@/components/demo/DemoRunner";
 
 const demos = Object.values(demoRegistry);
 
 export default function ControlCenter() {
-  const [selected, setSelected] = useState<DemoKey | null>(null);
+  const router = useRouter();
+  const searchParams = useSearchParams();
 
-  const run = selected ? demoRegistry[selected] : null;
+  const selected = searchParams.get("demo") as DemoKey | null;
+  const run = selected && demoRegistry[selected] ? demoRegistry[selected] : null;
+
+  // 👇 NEW: controls preview vs execution
+  const [mode, setMode] = useState<"preview" | "run">("preview");
 
   return (
     <main className="relative min-h-screen bg-navy text-offwhite overflow-hidden p-8">
@@ -23,16 +28,29 @@ export default function ControlCenter() {
       <div className="absolute inset-0 grid-overlay opacity-20" />
 
       {/* HEADER */}
-      <div className="relative z-10 max-w-6xl mx-auto mb-8 flex justify-between items-center">
-        <div>
-          <div className="text-xs text-offwhite/50 tracking-widest">
-            AI SYSTEM CONTROL CENTER
-          </div>
-          <h1 className="text-2xl font-semibold text-gradient">
-            Demo Lab
-          </h1>
-        </div>
+      <div className="relative z-10 max-w-6xl mx-auto mb-6 flex justify-between items-center">
+        <h1 className="text-2xl font-semibold text-gradient">
+          Demo Lab
+        </h1>
+
+        <button
+          onClick={() => router.back()}
+          className="text-offwhite/50 hover:text-offwhite text-sm"
+        >
+          ← Back
+        </button>
       </div>
+
+      {/* Instruction */}
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="relative z-10 max-w-3xl mx-auto text-center mb-10"
+      >
+        <p className="text-lg text-offwhite/80">
+          Select a module to explore how an AI system processes inputs and produces decisions.
+        </p>
+      </motion.div>
 
       {/* MODULE GRID */}
       <div className="relative z-10 max-w-6xl mx-auto grid md:grid-cols-3 gap-6">
@@ -41,7 +59,11 @@ export default function ControlCenter() {
           <motion.div
             key={demo.id}
             whileHover={{ scale: 1.03 }}
-            onClick={() => setSelected(demo.id as DemoKey)}
+            whileTap={{ scale: 0.98 }}
+            onClick={() => {
+              setMode("preview"); // reset mode
+              router.push(`?demo=${demo.id}`, { scroll: false });
+            }}
             className="relative group cursor-pointer border border-white/10 p-5 rounded-xl bg-charcoal/60 backdrop-blur"
           >
             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition bg-gradient-to-r from-electric/10 to-indigo/10 blur-xl" />
@@ -49,7 +71,7 @@ export default function ControlCenter() {
             <div className="relative z-10">
               <div className="flex justify-between text-xs mb-2">
                 <span className="text-offwhite/50">MODULE</span>
-                <span className="text-green-400">● ACTIVE</span>
+                <span className="text-cyan">● ACTIVE</span>
               </div>
 
               <h2 className="text-lg font-medium">{demo.name}</h2>
@@ -59,10 +81,25 @@ export default function ControlCenter() {
         ))}
       </div>
 
+      {/* CTA */}
+      <div className="relative z-10 mt-12 text-center">
+        <p className="text-sm text-offwhite/40 mb-3">
+          Interested in building something similar?
+        </p>
+
+        <button
+          onClick={() => router.push("/work")}
+          className="px-5 py-2 bg-electric text-white rounded-lg shadow-glow hover:scale-105 transition"
+        >
+          Work With Me →
+        </button>
+      </div>
+
       {/* MODAL */}
       <AnimatePresence>
         {run && (
           <motion.div
+            key={mode}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -81,20 +118,78 @@ export default function ControlCenter() {
                 <h2 className="text-2xl font-semibold text-gradient">
                   {run.name}
                 </h2>
+
                 <button
-                  onClick={() => setSelected(null)}
+                  onClick={() => router.back()}
                   className="text-offwhite/50 hover:text-offwhite"
                 >
                   ✕
                 </button>
               </div>
 
-              <div className="mb-6 text-sm text-offwhite/60">
-                INPUT: {run.input.title}
-              </div>
+              {/* PREVIEW MODE */}
+              {mode === "preview" && (
+                <div>
 
-              {/* running via DemoRunner */}
-              <DemoRunner run={run} />
+                  <p className="text-offwhite/60 mb-6">
+                    {run.description}
+                  </p>
+
+                  {/* Architecture */}
+                  <div className="mb-8">
+                    <div className="text-xs text-offwhite/50 mb-3">
+                      SYSTEM FLOW
+                    </div>
+
+                    <div className="flex flex-wrap gap-3 items-center">
+                      {run.steps.map((step, i) => (
+                        <div key={i} className="flex items-center gap-3">
+                          <div className="px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-sm">
+                            {step.name}
+                          </div>
+                          {i !== run.steps.length - 1 && (
+                            <span className="text-offwhite/40">→</span>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Metrics */}
+                  <div className="grid grid-cols-3 gap-4 mb-8">
+                    {run.metrics.map((m, i) => (
+                      <div
+                        key={i}
+                        className="bg-white/5 border border-white/10 p-4 rounded-lg text-center"
+                      >
+                        <div className="text-xs text-offwhite/50">{m.name}</div>
+                        <div className="text-electric text-lg">
+                          {m.value.toFixed(2)}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Run Button */}
+                  <button
+                    onClick={() => setMode("run")}
+                    className="px-6 py-3 bg-electric text-white rounded-lg shadow-glow hover:scale-105 transition"
+                  >
+                    Run Demo →
+                  </button>
+                </div>
+              )}
+
+              {/* RUN MODE */}
+              {mode === "run" && (
+                <div>
+                  <div className="mb-6 text-sm text-offwhite/60">
+                    INPUT: {run.input.title}
+                  </div>
+
+                  <DemoRunner run={run} />
+                </div>
+              )}
 
             </motion.div>
           </motion.div>
