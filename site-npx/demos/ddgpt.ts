@@ -2,7 +2,7 @@ import { DemoRun } from "./types";
 
 export const ddgptRun: DemoRun = {
   id: "ddgpt",
-  name: "DDGPT",
+  name: "Due Diligence GPT",
   description: "Autonomous due diligence agent.",
 
   input: {

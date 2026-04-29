@@ -32,11 +32,6 @@ export default function ControlCenter() {
             Demo Lab
           </h1>
         </div>
-
-        <div className="text-xs text-offwhite/50 tracking-widest text-right">
-          <div>STATUS: <span className="text-cyan">OPERATIONAL</span></div>
-          <div>ACCESS: <span className="text-cyan">AUTHORIZED</span></div>
-        </div>
       </div>
 
       {/* MODULE GRID */}
@@ -54,7 +49,7 @@ export default function ControlCenter() {
             <div className="relative z-10">
               <div className="flex justify-between text-xs mb-2">
                 <span className="text-offwhite/50">MODULE</span>
-                <span className="text-cyan">● ACTIVE</span>
+                <span className="text-green-400">● ACTIVE</span>
               </div>
 
               <h2 className="text-lg font-medium">{demo.name}</h2>
@@ -92,6 +87,10 @@ export default function ControlCenter() {
                 >
                   ✕
                 </button>
+              </div>
+
+              <div className="mb-6 text-sm text-offwhite/60">
+                INPUT: {run.input.title}
               </div>
 
               {/* running via DemoRunner */}

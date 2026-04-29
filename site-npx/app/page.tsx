@@ -66,9 +66,7 @@ export default function Home() {
           transition={{ duration: 0.6 }}
           className="mt-8 max-w-xl text-slate-300 text-lg"
         >
-          Perception. Reasoning. Decision-making.
-          <br />
-          Built as systems — not just models.
+          Custom AI systems for decision-making, automation, and real-world deployment.
         </motion.p>
 
       </div>
