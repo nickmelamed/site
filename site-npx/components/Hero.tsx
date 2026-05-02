@@ -19,12 +19,6 @@ export default function Hero() {
           </span>
         </h1>
 
-        <p className="mt-6 max-w-xl text-slate-300 text-lg">
-          Perception. Reasoning. Decision-making.
-          <br />
-          Built as systems — not just models.
-        </p>
-
         <button className="mt-10 px-6 py-3 bg-electric text-white rounded-xl shadow-glow hover:scale-105 transition">
           Enter Demo Lab
         </button>

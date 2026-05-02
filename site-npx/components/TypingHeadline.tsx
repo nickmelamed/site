@@ -7,7 +7,7 @@ export default function TypingHeadline({
 }: {
   onComplete?: () => void;
 }) {
-  const fullText = "Systems That Think.";
+  const fullText = "Systems That Think";
   const [text, setText] = useState("");
   const [done, setDone] = useState(false);
 

@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Systems That Think. Before They Act.",
-  description: "AI systems for perception, reasoning, and decision-making.",
+  title: "Systems That Think Before They Act",
+  description: "Custom AI systems for real-world decisions",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

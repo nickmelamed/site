@@ -32,10 +32,10 @@ export default function Home() {
   return (
     <main className="relative flex flex-col items-center justify-center min-h-screen text-center px-6 overflow-hidden">
 
-      {/* 🌐 PARTICLES */}
+      {/* PARTICLES */}
       <ParticleBackground />
 
-      {/* 🔥 TRANSITION OVERLAY */}
+      {/* TRANSITION OVERLAY */}
       {transitioning && <SystemTransition />}
 
       <div className="relative z-10">
@@ -45,7 +45,7 @@ export default function Home() {
           <TypingHeadline onComplete={() => setTypingDone(true)} />
           <br />
           <span className="text-offwhite">
-            Before They Act.
+            Before They Act
           </span>
         </h1>
 
@@ -66,7 +66,7 @@ export default function Home() {
           transition={{ duration: 0.6 }}
           className="mt-8 max-w-xl text-slate-300 text-lg"
         >
-          Custom AI systems for real-world decisions.
+          Custom AI systems for real-world decisions
         </motion.p>
 
       </div>
