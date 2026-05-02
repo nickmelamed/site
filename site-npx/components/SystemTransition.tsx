@@ -30,7 +30,7 @@ export default function SystemTransition() {
         </p>
 
         <p className="text-gradient text-lg font-medium tracking-wide">
-          Prepare to See the Future
+          Prepare to See the Magic of the Future
         </p>
 
         {/* Loading bar */}

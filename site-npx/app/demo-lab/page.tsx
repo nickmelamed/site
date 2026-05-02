@@ -18,7 +18,7 @@ export default function ControlCenter() {
 
   const [mode, setMode] = useState<"preview" | "run">("preview");
 
-  // ✅ Reset mode when switching demos
+  // Reset mode when switching demos
   useEffect(() => {
     setMode("preview");
   }, [selected]);
@@ -82,7 +82,7 @@ export default function ControlCenter() {
             <div className="relative z-10">
               <div className="flex justify-between text-xs mb-2">
                 <span className="text-offwhite/50">MODULE</span>
-                <span className="text-cyan">● ACTIVE</span>
+                <span className="text-green-400">● ACTIVE</span>
               </div>
 
               <h2 className="text-lg font-medium">{demo.name}</h2>
@@ -94,7 +94,7 @@ export default function ControlCenter() {
 
       {/* CTA */}
       <div className="relative z-10 mt-12 text-center">
-        <p className="text-sm text-offwhite/40 mb-3">
+        <p className="text-sm text-offwhite 40 mb-3">
           Interested in building something similar?
         </p>
 
