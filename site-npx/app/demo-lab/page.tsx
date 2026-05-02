@@ -63,7 +63,7 @@ export default function ControlCenter() {
         className="relative z-10 max-w-3xl mx-auto text-center mb-10"
       >
         <p className="text-lg text-offwhite/80">
-          Select a module to explore how an AI system processes inputs and produces decisions.
+          Choose a system to see how AI turns raw data into decisions.
         </p>
       </motion.div>
 
@@ -81,7 +81,6 @@ export default function ControlCenter() {
 
             <div className="relative z-10">
               <div className="flex justify-between text-xs mb-2">
-                <span className="text-offwhite/50">MODULE</span>
                 <span className="text-green-400">● ACTIVE</span>
               </div>
 
@@ -95,7 +94,7 @@ export default function ControlCenter() {
       {/* CTA */}
       <div className="relative z-10 mt-12 text-center">
         <p className="text-sm text-offwhite 40 mb-3">
-          Interested in building something similar?
+          Interested in something similar?
         </p>
 
         <button
@@ -130,7 +129,7 @@ export default function ControlCenter() {
                   {run.name}
                 </h2>
 
-                {/* 🔥 FIXED CLOSE BUTTON */}
+                {/* CLOSE BUTTON */}
                 <button
                   onClick={closeDemo}
                   className="text-offwhite/50 hover:text-offwhite"

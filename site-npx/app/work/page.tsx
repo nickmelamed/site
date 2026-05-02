@@ -43,7 +43,7 @@ export default function WorkWithMe() {
         </div>
 
         <p className="text-sm text-offwhite/60 mb-6">
-          Tell me what you're trying to build — I'll help design and implement an AI system tailored to your needs.
+          Tell me what you're trying to build — let's get it done.
         </p>
 
         {/* Form */}
@@ -70,7 +70,7 @@ export default function WorkWithMe() {
           />
 
           <textarea
-            placeholder="What are you trying to build?"
+            placeholder="What are you trying to create?"
             value={form.message}
             onChange={(e) =>
               setForm({ ...form, message: e.target.value })

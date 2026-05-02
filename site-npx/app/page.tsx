@@ -66,7 +66,7 @@ export default function Home() {
           transition={{ duration: 0.6 }}
           className="mt-8 max-w-xl text-slate-300 text-lg"
         >
-          Custom AI systems for real-world decision-making and automation.
+          Custom AI systems for real-world decisions.
         </motion.p>
 
       </div>
