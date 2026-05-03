@@ -3,23 +3,28 @@ import TypingHeadline from "./TypingHeadline";
 
 export default function Hero() {
   return (
-    <main className="relative flex flex-col items-center justify-center min-h-screen text-center px-6 overflow-hidden">
+    <main className="relative flex flex-col items-center justify-center min-h-screen text-center px-6 overflow-hidden text-offwhite">
 
-      {/* PARTICLES = SIGNALS */}
+      {/* PARTICLES */}
       <ParticleBackground />
 
       {/* CONTENT */}
       <div className="relative z-10">
 
-        <h1 className="text-5xl md:text-7xl font-semibold tracking-tight">
-          <TypingHeadline />
+        <h1 className="text-5xl md:text-7xl font-semibold tracking-tight leading-tight">
+          
+          <span className="text-gradient">
+            <TypingHeadline />
+          </span>
+
           <br />
-          <span className="text-offwhite">
+
+          <span className="text-offwhite/80">
             Before They Act.
           </span>
         </h1>
 
-        <button className="mt-10 px-6 py-3 bg-electric text-white rounded-xl shadow-glow hover:scale-105 transition">
+        <button className="mt-10 btn-primary">
           Enter Demo Lab
         </button>
 

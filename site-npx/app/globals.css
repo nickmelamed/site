@@ -5,25 +5,26 @@
 /* Theme variables */
 :root {
   /* Primary */
-  --primary: 56, 189, 248;        
-  --primary-soft: 59, 130, 246;  
-  --primary-alt: 99, 102, 241;   
+  --primary: 56 189 248;        
+  --primary-soft: 59 130 246;  
+  --primary-alt: 99 102 241;   
 
   /* Backgrounds */
-  --bg-main: 2, 6, 23;        
-  --bg-surface: 15, 23, 42;      
+  --bg-main: 2 6 23;        
+  --bg-surface: 15 23 42;      
 
   /* Text */
-  --text-main: 226, 232, 240;  
-  --text-muted: 148, 163, 184;
+  --text-main: 226 232 240;  
+  --text-muted: 148 163 184;
 
   /* GRID */
-  --grid-line: 255, 255, 255;
+  --grid-line: 255 255 255;
 }
 
-/* Base systme styling */
+/* Base system styling */
 body {
-  @apply bg-navy text-offwhite;
+  @apply bg-navy;
+  color: rgb(var(--text-main));
 }
 
 /* Smooth rendering */
