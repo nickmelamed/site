@@ -34,7 +34,7 @@ export default function TypingHeadline({
   return (
     <span className="text-gradient">
       {text}
-      {!done && <span className="animate-pulse">|</span>}
+      {!done && <span className="opacity-60 animate-pulse">|</span>}
     </span>
   );
 }

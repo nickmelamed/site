@@ -24,7 +24,7 @@ export default function ParticleBackground() {
         background: { color: "transparent" },
         particles: {
           number: { value: 60 },
-          color: { value: "#00D1FF" },
+          color: { value: "rgb(56, 189, 248)" }, // matches --primary
           opacity: { value: 0.3 },
           size: { value: 2 },
           move: {
@@ -33,7 +33,7 @@ export default function ParticleBackground() {
           },
           links: {
             enable: true,
-            color: "#2D9CDB",
+            color: "rgb(59, 130, 246)",
             opacity: 0.2,
           },
         },

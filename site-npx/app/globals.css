@@ -2,7 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Base system styling */
+/* Theme variables */
+:root {
+  /* Primary */
+  --primary: 56, 189, 248;        
+  --primary-soft: 59, 130, 246;  
+  --primary-alt: 99, 102, 241;   
+
+  /* Backgrounds */
+  --bg-main: 2, 6, 23;        
+  --bg-surface: 15, 23, 42;      
+
+  /* Text */
+  --text-main: 226, 232, 240;  
+  --text-muted: 148, 163, 184;
+
+  /* GRID */
+  --grid-line: 255, 255, 255;
+}
+
+/* Base systme styling */
 body {
   @apply bg-navy text-offwhite;
 }
@@ -12,33 +31,37 @@ body {
   scroll-behavior: smooth;
 }
 
-/* Gradient text utility */
+/* Gradient Text */
 .text-gradient {
-  background: linear-gradient(90deg, #2D9CDB, #5A6CFF);
+  background: linear-gradient(
+    90deg,
+    rgb(var(--primary-soft)),
+    rgb(var(--primary-alt))
+  );
 
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-/* System glow */
+/* Glow */
 .glow {
-  box-shadow: 0 0 25px rgba(0, 209, 255, 0.4);
+  box-shadow: 0 0 25px rgba(var(--primary), 0.4);
 }
 
-/* System activation flash */
+/* System Flash */
 @keyframes systemFlash {
   0% {
-    box-shadow: 0 0 0 rgba(0, 209, 255, 0);
-    background-color: rgba(0, 209, 255, 0);
+    box-shadow: 0 0 0 rgba(var(--primary), 0);
+    background-color: rgba(var(--primary), 0);
   }
   50% {
-    box-shadow: 0 0 80px rgba(0, 209, 255, 0.8);
-    background-color: rgba(0, 209, 255, 0.08);
+    box-shadow: 0 0 80px rgba(var(--primary), 0.8);
+    background-color: rgba(var(--primary), 0.08);
   }
   100% {
-    box-shadow: 0 0 0 rgba(0, 209, 255, 0);
-    background-color: rgba(0, 209, 255, 0);
+    box-shadow: 0 0 0 rgba(var(--primary), 0);
+    background-color: rgba(var(--primary), 0);
   }
 }
 
@@ -46,12 +69,76 @@ body {
   animation: systemFlash 0.6s ease-out;
 }
 
-/* Subtle grid overlay (control center feel) */
+/* Grid Overlay */
 .grid-overlay {
   background-image: linear-gradient(
-      rgba(255, 255, 255, 0.03) 1px,
+      rgba(var(--grid-line), 0.03) 1px,
       transparent 1px
     ),
-    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    linear-gradient(
+      to right,
+      rgba(var(--grid-line), 0.03) 1px,
+      transparent 1px
+    );
   background-size: 40px 40px;
+}
+
+/* Semantic UI layer */
+
+/* surfaces */
+.bg-surface {
+  background-color: rgb(var(--bg-surface) / 0.8);
+  backdrop-filter: blur(12px);
+}
+
+/* borders */
+.border-subtle {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* text */
+.text-muted {
+  color: rgb(var(--text-muted));
+}
+
+/* inputs */
+.input-base {
+  background-color: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  outline: none;
+  width: 100%;
+  transition: border 0.2s ease;
+}
+
+.input-base:focus {
+  border-color: rgb(var(--primary));
+}
+
+/* buttons */
+.btn-primary {
+  background-color: rgb(var(--primary));
+  color: white;
+  border-radius: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-primary:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(var(--primary), 0.4);
+}
+
+/* panels (cards/modals) */
+.panel {
+  background-color: rgb(var(--bg-surface) / 0.9);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.75rem;
+}
+
+/* hover glow */
+.hover-glow:hover {
+  box-shadow: 0 0 30px rgba(var(--primary), 0.2);
 }

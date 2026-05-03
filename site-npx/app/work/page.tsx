@@ -25,7 +25,7 @@ export default function WorkWithMe() {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="relative z-10 w-full max-w-lg bg-charcoal/80 backdrop-blur-xl border border-white/10 rounded-xl p-8"
+        className="relative z-10 w-full max-w-lg panel p-8"
       >
 
         {/* Header */}
@@ -42,7 +42,7 @@ export default function WorkWithMe() {
           </button>
         </div>
 
-        <p className="text-sm text-offwhite/60 mb-6">
+        <p className="text-sm text-muted mb-6">
           Tell me what you're trying to build — let's get it done.
         </p>
 
@@ -56,7 +56,7 @@ export default function WorkWithMe() {
             onChange={(e) =>
               setForm({ ...form, name: e.target.value })
             }
-            className="w-full px-4 py-2 bg-black/40 border border-white/10 rounded-lg focus:outline-none focus:border-cyan"
+            className="input-base"
           />
 
           <input
@@ -66,7 +66,7 @@ export default function WorkWithMe() {
             onChange={(e) =>
               setForm({ ...form, email: e.target.value })
             }
-            className="w-full px-4 py-2 bg-black/40 border border-white/10 rounded-lg focus:outline-none focus:border-cyan"
+            className="input-base"
           />
 
           <textarea
@@ -75,14 +75,13 @@ export default function WorkWithMe() {
             onChange={(e) =>
               setForm({ ...form, message: e.target.value })
             }
-            className="w-full px-4 py-2 h-28 bg-black/40 border border-white/10 rounded-lg focus:outline-none focus:border-cyan"
+            className="input-base h-28"
           />
 
-          <button className="w-full py-3 bg-electric text-white rounded-lg shadow-glow hover:scale-105 transition">
+          <button className="btn-primary w-full">
             Send Message
           </button>
         </div>
-
       </motion.div>
     </main>
   );

@@ -6,12 +6,13 @@ import { motion } from "framer-motion";
 
 import ParticleBackground from "@/components/Particles";
 import TypingHeadline from "@/components/TypingHeadline";
-import InlinePassword from "@/components/InlinePassword";
 import SystemTransition from "@/components/SystemTransition";
 
 export default function Home() {
   const [typingDone, setTypingDone] = useState(false);
   const [transitioning, setTransitioning] = useState(false);
+  const [showInput, setShowInput] = useState(false);
+  const [password, setPassword] = useState("");
 
   const router = useRouter();
 
@@ -30,7 +31,7 @@ export default function Home() {
   };
 
   return (
-    <main className="relative flex flex-col items-center justify-center min-h-screen text-center px-6 overflow-hidden">
+    <main className="relative flex flex-col items-center justify-center min-h-screen text-center px-6 overflow-hidden text-offwhite">
 
       {/* PARTICLES */}
       <ParticleBackground />
@@ -42,18 +43,60 @@ export default function Home() {
 
         {/* HEADLINE */}
         <h1 className="text-5xl md:text-7xl font-semibold tracking-tight leading-tight">
-          <TypingHeadline onComplete={() => setTypingDone(true)} />
+
+          {/* Force gradient styling explicitly */}
+          <span className="text-gradient">
+            <TypingHeadline onComplete={() => setTypingDone(true)} />
+          </span>
+
           <br />
+
           <span className="text-offwhite">
             Before They Act
           </span>
         </h1>
 
-        {/* PASSWORD */}
-        <InlinePassword
-          visible={typingDone}
-          onUnlock={handleUnlock}
-        />
+        {/* UNLOCK FLOW */}
+        {typingDone && (
+          <div className="mt-8">
+
+            {!showInput ? (
+              <button
+                onClick={() => setShowInput(true)}
+                className="btn-primary"
+              >
+                Unlock
+              </button>
+            ) : (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="flex items-center gap-3 justify-center"
+              >
+                <input
+                  type="password"
+                  placeholder="Enter access key"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="input-base w-64"
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      handleUnlock();
+                    }
+                  }}
+                />
+
+                <button
+                  onClick={handleUnlock}
+                  className="btn-primary"
+                >
+                  Enter
+                </button>
+              </motion.div>
+            )}
+
+          </div>
+        )}
 
         {/* SUBTEXT */}
         <motion.p
@@ -64,7 +107,7 @@ export default function Home() {
               : { opacity: 0, y: 10 }
           }
           transition={{ duration: 0.6 }}
-          className="mt-8 max-w-xl text-slate-300 text-lg"
+          className="mt-8 max-w-xl text-muted text-lg"
         >
           Custom AI systems for real-world decisions
         </motion.p>

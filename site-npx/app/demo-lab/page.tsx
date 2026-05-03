@@ -18,19 +18,17 @@ export default function ControlCenter() {
 
   const [mode, setMode] = useState<"preview" | "run">("preview");
 
-  // Reset mode when switching demos
   useEffect(() => {
     setMode("preview");
   }, [selected]);
 
-  // REUSABLE HELPERS
   const openDemo = (id: DemoKey) => {
     setMode("preview");
     router.push(`?demo=${id}`, { scroll: false });
   };
 
   const closeDemo = () => {
-    router.push("?", { scroll: false }); // removes ?demo param cleanly
+    router.push("?", { scroll: false });
   };
 
   return (
@@ -47,7 +45,6 @@ export default function ControlCenter() {
           Demo Lab
         </h1>
 
-        {/* Back to landing */}
         <button
           onClick={() => router.push("/")}
           className="text-offwhite/50 hover:text-offwhite text-sm"
@@ -62,12 +59,12 @@ export default function ControlCenter() {
         animate={{ opacity: 1, y: 0 }}
         className="relative z-10 max-w-3xl mx-auto text-center mb-10"
       >
-        <p className="text-lg text-offwhite/80">
+        <p className="text-lg text-muted">
           Choose a system to see how AI turns raw data into decisions.
         </p>
       </motion.div>
 
-      {/* MODULE GRID */}
+      {/* DEMO GRID */}
       <div className="relative z-10 max-w-6xl mx-auto grid md:grid-cols-3 gap-6">
         {demos.map(([key, demo]) => (
           <motion.div
@@ -75,9 +72,10 @@ export default function ControlCenter() {
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.98 }}
             onClick={() => openDemo(demo.id as DemoKey)}
-            className="relative group cursor-pointer border border-white/10 p-5 rounded-xl bg-charcoal/60 backdrop-blur"
+            className="relative group cursor-pointer panel p-5 hover-glow"
           >
-            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition bg-gradient-to-r from-electric/10 to-indigo/10 blur-xl" />
+            {/* Hover glow */}
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition bg-gradient-to-r from-electric/10 to-electric/30 blur-xl" />
 
             <div className="relative z-10">
               <div className="flex justify-between text-xs mb-2">
@@ -85,7 +83,7 @@ export default function ControlCenter() {
               </div>
 
               <h2 className="text-lg font-medium">{demo.name}</h2>
-              <p className="text-offwhite/60 text-sm">{demo.description}</p>
+              <p className="text-muted text-sm">{demo.description}</p>
             </div>
           </motion.div>
         ))}
@@ -93,13 +91,13 @@ export default function ControlCenter() {
 
       {/* CTA */}
       <div className="relative z-10 mt-12 text-center">
-        <p className="text-sm text-offwhite 40 mb-3">
+        <p className="text-sm text-muted mb-3">
           Interested in something similar?
         </p>
 
         <button
           onClick={() => router.push("/work")}
-          className="px-5 py-2 bg-electric text-white rounded-lg shadow-glow hover:scale-105 transition"
+          className="btn-primary"
         >
           Work With Me →
         </button>
@@ -121,7 +119,7 @@ export default function ControlCenter() {
               initial={{ scale: 0.95, y: 20 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.95, y: 20 }}
-              className="relative z-10 max-w-4xl w-full border border-white/10 rounded-xl p-8 bg-charcoal/90"
+              className="relative z-10 max-w-4xl w-full panel p-8"
             >
               {/* Header */}
               <div className="flex justify-between mb-6">
@@ -129,7 +127,6 @@ export default function ControlCenter() {
                   {run.name}
                 </h2>
 
-                {/* CLOSE BUTTON */}
                 <button
                   onClick={closeDemo}
                   className="text-offwhite/50 hover:text-offwhite"
@@ -141,25 +138,24 @@ export default function ControlCenter() {
               {/* PREVIEW */}
               {mode === "preview" && (
                 <div>
-
-                  <p className="text-offwhite/60 mb-6">
+                  <p className="text-muted mb-6">
                     {run.description}
                   </p>
 
                   {/* SYSTEM FLOW */}
                   <div className="mb-8">
-                    <div className="text-xs text-offwhite/50 mb-3">
+                    <div className="text-xs text-muted mb-3">
                       SYSTEM FLOW
                     </div>
 
                     <div className="flex flex-wrap gap-3 items-center">
                       {run.steps.map((step, i) => (
                         <div key={i} className="flex items-center gap-3">
-                          <div className="px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-sm">
+                          <div className="panel px-3 py-2 text-sm">
                             {step.name}
                           </div>
                           {i !== run.steps.length - 1 && (
-                            <span className="text-offwhite/40">→</span>
+                            <span className="text-muted">→</span>
                           )}
                         </div>
                       ))}
@@ -169,11 +165,8 @@ export default function ControlCenter() {
                   {/* METRICS */}
                   <div className="grid grid-cols-3 gap-4 mb-8">
                     {run.metrics.map((m, i) => (
-                      <div
-                        key={i}
-                        className="bg-white/5 border border-white/10 p-4 rounded-lg text-center"
-                      >
-                        <div className="text-xs text-offwhite/50">{m.name}</div>
+                      <div key={i} className="panel p-4 text-center">
+                        <div className="text-xs text-muted">{m.name}</div>
                         <div className="text-electric text-lg">
                           {m.value.toFixed(2)}
                         </div>
@@ -191,7 +184,7 @@ export default function ControlCenter() {
                         setMode("run");
                       }, 400);
                     }}
-                    className="px-6 py-3 bg-electric text-white rounded-lg shadow-glow hover:scale-105 transition"
+                    className="btn-primary"
                   >
                     Run Demo →
                   </button>
@@ -207,12 +200,10 @@ export default function ControlCenter() {
                   <DemoRunner run={run} active={true} />
                 </motion.div>
               )}
-
             </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
-
     </main>
   );
 }

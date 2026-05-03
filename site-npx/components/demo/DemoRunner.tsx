@@ -17,19 +17,17 @@ export default function DemoRunner({
     <div className="space-y-8">
 
       {/* INPUT */}
-      <div className="bg-charcoal/60 p-4 rounded-xl border border-white/10">
-        <div className="text-xs text-offwhite/50 mb-2">INPUT</div>
+      <div className="panel p-4">
+        <div className="text-xs text-muted mb-2">INPUT</div>
         <h3 className="text-lg font-medium">{run.input.title}</h3>
-        <p className="text-offwhite/60 text-sm mt-1">
+        <p className="text-muted text-sm mt-1">
           {run.input.content}
         </p>
       </div>
 
-      {/* PIPELINE (LIVE STATE) */}
+      {/* PIPELINE */}
       <div>
-        <div className="text-xs text-offwhite/50 mb-3">
-          PIPELINE
-        </div>
+        <div className="text-xs text-muted mb-3">PIPELINE</div>
 
         <div className="flex flex-wrap gap-3 items-center">
           {run.steps.map((step, i) => (
@@ -39,34 +37,32 @@ export default function DemoRunner({
                   i === currentStep
                     ? "border-electric text-electric shadow-glow"
                     : i < currentStep
-                    ? "border-cyan text-cyan"
-                    : "border-white/10 text-offwhite/40"
+                    ? "border-electric text-electric/70"
+                    : "border-subtle text-muted"
                 }`}
               >
                 {step.name}
               </div>
 
               {i !== run.steps.length - 1 && (
-                <span className="text-offwhite/40">→</span>
+                <span className="text-muted">→</span>
               )}
             </div>
           ))}
         </div>
       </div>
 
-      {/* LOGS (LIVE STREAM) */}
-      <div className="bg-black/40 border border-white/10 rounded-lg p-4 font-mono text-xs text-cyan h-40 overflow-y-auto">
+      {/* LOGS */}
+      <div className="panel p-4 font-mono text-xs text-electric h-40 overflow-y-auto">
         {logs.map((log, i) => (
           <div key={i}>{log}</div>
         ))}
       </div>
 
-      {/* OUTPUT (DELAYED UNTIL COMPLETE) */}
+      {/* OUTPUT */}
       {complete && (
-        <div className="bg-charcoal/60 p-4 rounded-xl border border-white/10">
-          <div className="text-xs text-offwhite/50 mb-2">
-            OUTPUT
-          </div>
+        <div className="panel p-4">
+          <div className="text-xs text-muted mb-2">OUTPUT</div>
 
           {run.output.type === "text" && (
             <p className="text-offwhite/80 whitespace-pre-line">
@@ -75,7 +71,7 @@ export default function DemoRunner({
           )}
 
           {run.output.type === "log" && (
-            <div className="font-mono text-sm text-cyan space-y-1">
+            <div className="font-mono text-sm text-electric space-y-1">
               {run.output.content.map((line: string, i: number) => (
                 <div key={i}>› {line}</div>
               ))}
@@ -84,15 +80,12 @@ export default function DemoRunner({
         </div>
       )}
 
-      {/* METRICS (ONLY AFTER COMPLETE) */}
+      {/* METRICS */}
       {complete && (
         <div className="grid grid-cols-3 gap-4">
           {run.metrics.map((m, i) => (
-            <div
-              key={i}
-              className="bg-white/5 border border-white/10 p-4 rounded-lg text-center"
-            >
-              <div className="text-xs text-offwhite/50">
+            <div key={i} className="panel p-4 text-center">
+              <div className="text-xs text-muted">
                 {m.name}
               </div>
               <div className="text-electric text-lg">

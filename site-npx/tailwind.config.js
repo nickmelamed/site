@@ -1,50 +1,44 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-  "./app/**/*.{js,ts,jsx,tsx}",
-  "./components/**/*.{js,ts,jsx,tsx}",
-],
+    "./app/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
+  ],
   theme: {
     extend: {
       colors: {
-        // Core palette
-        navy: "#0B1F3A",
-        slate: "#2F3E4E",
-        charcoal: "#1A1D23",
-        offwhite: "#F5F7FA",
+        navy: "rgb(var(--bg-main) / <alpha-value>)",
+        charcoal: "rgb(var(--bg-surface) / <alpha-value>)",
 
-        // Accents
-        electric: "#2D9CDB",
-        cyan: "#00D1FF",
-        indigo: "#5A6CFF",
+        offwhite: "rgb(var(--text-main) / <alpha-value>)",
+        muted: "rgb(var(--text-muted) / <alpha-value>)",
+
+        electric: "rgb(var(--primary) / <alpha-value>)",
       },
+
       backgroundImage: {
         "hero-gradient":
-          "linear-gradient(135deg, #0B1F3A 0%, #1A1D23 50%, #2D9CDB 100%)",
-        "text-gradient":
-          "linear-gradient(90deg, #2D9CDB, #5A6CFF)",
+          "linear-gradient(120deg, rgb(2,6,23) 0%, rgb(30,58,138) 100%)",
+
         "glow-radial":
-          "radial-gradient(circle at center, rgba(0,209,255,0.15), transparent 70%)",
+          "radial-gradient(circle at 50% 50%, rgba(var(--primary), 0.15), transparent 60%)",
       },
+
       boxShadow: {
-        glow: "0 0 20px rgba(0, 209, 255, 0.35)",
+        glow: "0 0 25px rgba(var(--primary), 0.4)",
       },
-      animation: {
-        float: "float 6s ease-in-out infinite",
-        pulseGlow: "pulseGlow 3s ease-in-out infinite",
-      },
+
       keyframes: {
-        float: {
-          "0%, 100%": { transform: "translateY(0px)" },
-          "50%": { transform: "translateY(-10px)" },
-        },
         pulseGlow: {
-          "0%, 100%": { opacity: 0.4 },
+          "0%, 100%": { opacity: 0.6 },
           "50%": { opacity: 1 },
         },
+      },
+
+      animation: {
+        pulseGlow: "pulseGlow 3s ease-in-out infinite",
       },
     },
   },
   plugins: [],
 };
-
