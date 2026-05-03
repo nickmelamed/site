@@ -47,7 +47,7 @@ body {
 
 /* Glow */
 .glow {
-  box-shadow: 0 0 25px rgba(var(--primary), 0.4);
+  box-shadow: 0 0 25px rgb(var(--primary), 0.4);
 }
 
 /* System Flash */
@@ -94,7 +94,7 @@ body {
 
 /* borders */
 .border-subtle {
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgb(var(--grid-line) / 0.1);
 }
 
 /* text */
@@ -104,8 +104,8 @@ body {
 
 /* inputs */
 .input-base {
-  background-color: rgba(0, 0, 0, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: rgb(var(--bg-main) / 0.4);
+  border: 1px solid rgb(var(--grid-line) / 0.1);
   border-radius: 0.5rem;
   padding: 0.5rem 1rem;
   outline: none;
@@ -128,7 +128,7 @@ body {
 
 .btn-primary:hover {
   transform: scale(1.05);
-  box-shadow: 0 0 25px rgba(var(--primary), 0.4);
+  box-shadow: 0 0 25px rgb(var(--primary), 0.4);
 }
 
 /* panels (cards/modals) */
@@ -141,5 +141,43 @@ body {
 
 /* hover glow */
 .hover-glow:hover {
-  box-shadow: 0 0 30px rgba(var(--primary), 0.2);
+  box-shadow: 0 0 30px rgb(var(--primary), 0.2);
+}
+
+/* Typography */
+
+.text-primary {
+  color: rgb(var(--text-main));
+}
+
+.text-secondary {
+  color: rgb(var(--text-main) / 0.7);
+}
+
+.text-tertiary {
+  color: rgb(var(--text-main) / 0.5);
+}
+
+.text-disabled {
+  color: rgb(var(--text-main) / 0.3);
+}
+
+/* semantic sizes */
+.text-title {
+  font-size: 2.5rem;
+  font-weight: 600;
+}
+
+.text-subtitle {
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+.text-body {
+  font-size: 1rem;
+}
+
+.text-caption {
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
 }
