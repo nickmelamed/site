@@ -14,41 +14,34 @@ export default function WorkWithMe() {
   });
 
   return (
-    <main className="relative min-h-screen bg-navy text-offwhite overflow-hidden flex items-center justify-center px-6">
+    <main className="relative min-h-screen bg-navy flex items-center justify-center px-6">
 
-      {/* Background */}
       <div className="absolute inset-0 bg-hero-gradient opacity-80" />
       <div className="absolute inset-0 bg-glow-radial animate-pulseGlow" />
       <div className="absolute inset-0 grid-overlay opacity-20" />
 
-      {/* Content */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="relative z-10 w-full max-w-lg panel p-8"
+        className="relative z-10 w-full max-w-lg panel p-8 stack-lg"
       >
 
-        {/* Header */}
-        <div className="flex justify-between mb-6">
-          <h1 className="text-2xl font-semibold text-gradient">
-            Work With Me
-          </h1>
+        <div className="flex justify-between items-center">
+          <h1 className="text-title text-gradient">Work With Me</h1>
 
           <button
             onClick={() => router.back()}
-            className="text-offwhite/50 hover:text-offwhite"
+            className="text-tertiary hover:text-primary"
           >
             ← Back
           </button>
         </div>
 
-        <p className="text-sm text-muted mb-6">
+        <p className="text-secondary text-body">
           Tell me what you're trying to build — let's get it done.
         </p>
 
-        {/* Form */}
-        <div className="space-y-4">
-
+        <div className="stack-md">
           <input
             type="text"
             placeholder="Name"
@@ -56,7 +49,7 @@ export default function WorkWithMe() {
             onChange={(e) =>
               setForm({ ...form, name: e.target.value })
             }
-            className="input-base"
+            className="input-base text-body"
           />
 
           <input
@@ -66,7 +59,7 @@ export default function WorkWithMe() {
             onChange={(e) =>
               setForm({ ...form, email: e.target.value })
             }
-            className="input-base"
+            className="input-base text-body"
           />
 
           <textarea
@@ -75,10 +68,10 @@ export default function WorkWithMe() {
             onChange={(e) =>
               setForm({ ...form, message: e.target.value })
             }
-            className="input-base h-28"
+            className="input-base text-body h-28"
           />
 
-          <button className="btn-primary w-full">
+          <button className="btn-primary w-full text-body">
             Send Message
           </button>
         </div>

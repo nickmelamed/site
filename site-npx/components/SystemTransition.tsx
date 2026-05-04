@@ -17,13 +17,13 @@ export default function SystemTransition() {
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
-        className="relative z-10 text-center"
+        className="relative z-10 text-center stack-sm"
       >
-        <p className="text-caption trackingf-[0.3em] mb-3 text-secondary">
+        <p className="text-caption text-secondary tracking-[var(--tracking-ultra)]">
           Initializing Intelligence...
         </p>
 
-        <p className="text-gradient text-subtitle tracking-wide">
+        <p className="text-gradient text-subtitle">
           Prepare to See the Magic of the Future
         </p>
 
@@ -31,7 +31,7 @@ export default function SystemTransition() {
           initial={{ width: 0 }}
           animate={{ width: "200px" }}
           transition={{ duration: 1 }}
-          className="h-[2px] bg-electric mt-6 mx-auto shadow-glow"
+          className="h-[2px] bg-electric mx-auto shadow-glow"
         />
       </motion.div>
     </motion.div>

@@ -14,26 +14,26 @@ export default function DemoRunner({
     useDemoExecution(run, active);
 
   return (
-    <div className="space-y-8">
+    <div className="stack-lg">
 
       {/* INPUT */}
-      <div className="panel p-4">
-        <div className="text-caption text-secondary mb-2">INPUT</div>
+      <div className="panel p-4 stack-sm">
+        <div className="text-caption text-secondary">INPUT</div>
         <h3 className="text-subtitle">{run.input.title}</h3>
-        <p className="text-secondary text-body mt-1">
+        <p className="text-secondary text-body">
           {run.input.content}
         </p>
       </div>
 
       {/* PIPELINE */}
-      <div>
-        <div className="text-caption text-secondary mb-3">PIPELINE</div>
+      <div className="stack-sm">
+        <div className="text-caption text-secondary">PIPELINE</div>
 
-        <div className="flex flex-wrap gap-3 items-center">
+        <div className="flex flex-wrap inline-sm items-center">
           {run.steps.map((step, i) => (
-            <div key={i} className="flex items-center gap-3">
+            <div key={i} className="flex items-center inline-sm">
               <div
-                className={`px-3 py-2 rounded-lg text-sm border transition ${
+                className={`px-3 py-2 rounded-lg text-body border transition ${
                   i === currentStep
                     ? "border-electric text-electric shadow-glow"
                     : i < currentStep
@@ -45,7 +45,7 @@ export default function DemoRunner({
               </div>
 
               {i !== run.steps.length - 1 && (
-                <span className="text-muted">→</span>
+                <span className="text-secondary">→</span>
               )}
             </div>
           ))}
@@ -61,21 +61,13 @@ export default function DemoRunner({
 
       {/* OUTPUT */}
       {complete && (
-        <div className="panel p-4">
-          <div className="text-xs text-muted mb-2">OUTPUT</div>
+        <div className="panel p-4 stack-sm">
+          <div className="text-caption text-secondary">OUTPUT</div>
 
           {run.output.type === "text" && (
             <p className="text-secondary text-body whitespace-pre-line">
               {run.output.content}
             </p>
-          )}
-
-          {run.output.type === "log" && (
-            <div className="font-mono text-sm text-electric space-y-1">
-              {run.output.content.map((line: string, i: number) => (
-                <div key={i}>› {line}</div>
-              ))}
-            </div>
           )}
         </div>
       )}
@@ -84,7 +76,7 @@ export default function DemoRunner({
       {complete && (
         <div className="grid grid-cols-3 gap-4">
           {run.metrics.map((m, i) => (
-            <div key={i} className="panel p-4 text-center">
+            <div key={i} className="panel p-4 text-center stack-xs">
               <div className="text-caption text-secondary">
                 {m.name}
               </div>

@@ -32,75 +32,74 @@ export default function ControlCenter() {
   };
 
   return (
-    <main className="relative min-h-screen bg-navy text-offwhite overflow-hidden p-8">
+    <main className="relative min-h-screen bg-navy overflow-hidden">
 
-      {/* Background */}
       <div className="absolute inset-0 bg-hero-gradient opacity-80" />
       <div className="absolute inset-0 bg-glow-radial animate-pulseGlow" />
       <div className="absolute inset-0 grid-overlay opacity-20" />
 
-      {/* HEADER */}
-      <div className="relative z-10 max-w-6xl mx-auto mb-6 flex justify-between items-center">
-        <h1 className="text-2xl font-semibold text-gradient">
-          Demo Lab
-        </h1>
+      <div className="relative z-10 container-system stack-lg">
 
-        <button
-          onClick={() => router.push("/")}
-          className="text-tertiary hover:text-primary text-body"
-        >
-          ← Back
-        </button>
-      </div>
+        {/* HEADER */}
+        <div className="flex justify-between items-center">
+          <h1 className="text-title text-gradient">Demo Lab</h1>
 
-      {/* Instruction */}
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="relative z-10 max-w-3xl mx-auto text-center mb-10"
-      >
-        <p className="text-subtitle text-secondary">
-          Choose a system to see how AI turns raw data into decisions.
-        </p>
-      </motion.div>
-
-      {/* DEMO GRID */}
-      <div className="relative z-10 max-w-6xl mx-auto grid md:grid-cols-3 gap-6">
-        {demos.map(([key, demo]) => (
-          <motion.div
-            key={key}
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.98 }}
-            onClick={() => openDemo(demo.id as DemoKey)}
-            className="relative group cursor-pointer panel p-5 hover-glow"
+          <button
+            onClick={() => router.push("/")}
+            className="text-tertiary hover:text-primary text-body"
           >
-            {/* Hover glow */}
-            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition bg-gradient-to-r from-electric/10 to-electric/30 blur-xl" />
+            ← Back
+          </button>
+        </div>
 
-            <div className="relative z-10">
-              <div className="flex justify-between text-xs mb-2">
+        {/* INSTRUCTION */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
+          className="text-center"
+        >
+          <p className="text-subtitle text-secondary max-w-2xl mx-auto">
+            Choose a system to see how AI turns raw data into decisions.
+          </p>
+        </motion.div>
+
+        {/* GRID */}
+        <div className="grid md:grid-cols-3 gap-6">
+          {demos.map(([key, demo]) => (
+            <motion.div
+              key={key}
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={() => openDemo(demo.id as DemoKey)}
+              className="relative group cursor-pointer panel p-5 hover-glow stack-sm"
+            >
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition bg-gradient-to-r from-electric/10 to-electric/30 blur-xl" />
+
+              <div className="flex justify-between text-caption">
                 <span className="text-green-400">● ACTIVE</span>
               </div>
 
               <h2 className="text-subtitle">{demo.name}</h2>
               <p className="text-secondary text-body">{demo.description}</p>
-            </div>
-          </motion.div>
-        ))}
-      </div>
+            </motion.div>
+          ))}
+        </div>
 
-      {/* CTA */}
-      <div className="relative z-10 mt-12 text-center">
-        <p className="text-sm text-muted mb-3">
-          Interested in something similar?
-        </p>
+        {/* CTA */}
+        <div className="text-center stack-sm">
+          <p className="text-caption text-secondary">
+            Interested in something similar?
+          </p>
 
-        <button
-          onClick={() => router.push("/work")}
-          className="btn-primary"
-        >
-          Work With Me →
-        </button>
+          <button
+            onClick={() => router.push("/work")}
+            className="btn-primary text-body"
+          >
+            Work With Me →
+          </button>
+        </div>
+
       </div>
 
       {/* MODAL */}
@@ -119,79 +118,38 @@ export default function ControlCenter() {
               initial={{ scale: 0.95, y: 20 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.95, y: 20 }}
-              className="relative z-10 max-w-4xl w-full panel p-8"
+              className="relative z-10 max-w-4xl w-full panel p-8 stack-lg"
             >
-              {/* Header */}
-              <div className="flex justify-between mb-6">
-                <h2 className="text-2xl font-semibold text-gradient">
-                  {run.name}
-                </h2>
+              <div className="flex justify-between items-center">
+                <h2 className="text-title text-gradient">{run.name}</h2>
 
                 <button
                   onClick={closeDemo}
-                  className="text-offwhite/50 hover:text-offwhite"
+                  className="text-tertiary hover:text-primary"
                 >
                   ✕
                 </button>
               </div>
 
-              {/* PREVIEW */}
               {mode === "preview" && (
-                <div>
-                  <p className="text-muted mb-6">
-                    {run.description}
-                  </p>
+                <div className="stack-lg">
+                  <p className="text-secondary text-body">{run.description}</p>
 
-                  {/* SYSTEM FLOW */}
-                  <div className="mb-8">
-                    <div className="text-caption text-secondary mb-3">
-                      SYSTEM FLOW
-                    </div>
-
-                    <div className="flex flex-wrap gap-3 items-center">
-                      {run.steps.map((step, i) => (
-                        <div key={i} className="flex items-center gap-3">
-                          <div className="panel px-3 py-2 text-sm">
-                            {step.name}
-                          </div>
-                          {i !== run.steps.length - 1 && (
-                            <span className="text-muted">→</span>
-                          )}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* METRICS */}
-                  <div className="grid grid-cols-3 gap-4 mb-8">
-                    {run.metrics.map((m, i) => (
-                      <div key={i} className="panel p-4 text-center">
-                        <div className="text-caption text-secondary">{m.name}</div>
-                        <div className="text-subtitle text-electric">
-                          {m.value.toFixed(2)}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* RUN BUTTON */}
                   <button
                     onClick={() => {
                       document.body.classList.add("system-flash");
-
                       setTimeout(() => {
                         document.body.classList.remove("system-flash");
                         setMode("run");
                       }, 400);
                     }}
-                    className="btn-primary"
+                    className="btn-primary text-body"
                   >
                     Run Demo →
                   </button>
                 </div>
               )}
 
-              {/* RUN */}
               {mode === "run" && (
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}

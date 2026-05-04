@@ -24,11 +24,11 @@ export default function InlinePassword({
 
   return (
     <div
-      className={`mt-6 transition-all duration-500 ${
+      className={`transition-all ${
         visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
       }`}
     >
-      <div className="flex items-center gap-3 justify-center">
+      <div className="flex items-center justify-center inline-md">
 
         <input
           type="password"
@@ -38,24 +38,17 @@ export default function InlinePassword({
             setInput(e.target.value);
             setError(false);
           }}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              handleSubmit();
-            }
-          }}
-          className="input-base w-64"
+          onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
+          className="input-base w-64 text-body"
         />
 
-        <button
-          onClick={handleSubmit}
-          className="btn-primary"
-        >
+        <button onClick={handleSubmit} className="btn-primary text-body">
           Enter
         </button>
       </div>
 
       {error && (
-        <p className="text-caption text-secondary mt-2 text-center">
+        <p className="text-caption text-secondary text-center">
           Invalid key
         </p>
       )}

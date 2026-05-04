@@ -19,23 +19,17 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html 
-      lang="en" 
-      data-scroll-behavior='smooth'
-      className={`${geistSans.variable} ${geistMono.variable}`} 
-      >
-      <body className="min-h-screen bg-navy text-offwhite relative overflow-x-hidden">
+    <html
+      lang="en"
+      data-scroll-behavior="smooth"
+      className={`${geistSans.variable} ${geistMono.variable}`}
+    >
+      <body className="min-h-screen bg-navy text-primary relative overflow-x-hidden">
 
-        {/* Gradient system background */}
         <div className="absolute inset-0 bg-hero-gradient opacity-90" />
-
-        {/* Glow layer (signals) */}
         <div className="absolute inset-0 bg-glow-radial animate-pulseGlow" />
-
-        {/* Grid overlay (control system feel) */}
         <div className="absolute inset-0 grid-overlay pointer-events-none" />
 
-        {/* Content */}
         <div className="relative z-10 flex flex-col min-h-screen">
           {children}
         </div>

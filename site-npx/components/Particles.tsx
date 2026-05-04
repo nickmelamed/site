@@ -11,9 +11,7 @@ export default function ParticleBackground() {
   useEffect(() => {
     initParticlesEngine(async (engine) => {
       await loadSlim(engine);
-    }).then(() => {
-      setInit(true);
-    });
+    }).then(() => setInit(true));
   }, []);
 
   if (!init) return null;
@@ -24,7 +22,7 @@ export default function ParticleBackground() {
         background: { color: "transparent" },
         particles: {
           number: { value: 60 },
-          color: { value: "rgb(56, 189, 248)" }, // matches --primary
+          color: { value: "rgb(var(--primary))" },
           opacity: { value: 0.3 },
           size: { value: 2 },
           move: {
@@ -33,7 +31,7 @@ export default function ParticleBackground() {
           },
           links: {
             enable: true,
-            color: "rgb(59, 130, 246)",
+            color: "rgb(var(--primary-soft))",
             opacity: 0.2,
           },
         },

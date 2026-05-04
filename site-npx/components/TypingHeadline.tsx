@@ -22,9 +22,7 @@ export default function TypingHeadline({
         clearInterval(interval);
         setDone(true);
 
-        setTimeout(() => {
-          onComplete?.();
-        }, 400);
+        setTimeout(() => onComplete?.(), 400);
       }
     }, 40);
 
@@ -32,9 +30,9 @@ export default function TypingHeadline({
   }, []);
 
   return (
-    <span className="text-gradient">
+    <>
       {text}
       {!done && <span className="opacity-60 animate-pulse">|</span>}
-    </span>
+    </>
   );
 }

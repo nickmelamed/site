@@ -17,7 +17,6 @@ export function useDemoExecution(run: DemoRun | null, active: boolean) {
       for (const step of run.steps) {
         setCurrentStep(stepIndex);
 
-        // emit logs gradually
         if (step.logs) {
           for (const log of step.logs) {
             setLogs((prev) => [...prev, `› ${log}`]);

@@ -2,62 +2,116 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Theme variables */
+/* design tokens */
+
 :root {
-  /* Primary */
-  --primary: 56 189 248;        
-  --primary-soft: 59 130 246;  
-  --primary-alt: 99 102 241;   
+  /* colors */
+  --primary: 56 189 248;
+  --primary-soft: 59 130 246;
+  --primary-alt: 99 102 241;
 
-  /* Backgrounds */
-  --bg-main: 2 6 23;        
-  --bg-surface: 15 23 42;      
+  --bg-main: 2 6 23;
+  --bg-surface: 15 23 42;
 
-  /* Text */
-  --text-main: 226 232 240;  
+  --text-main: 226 232 240;
   --text-muted: 148 163 184;
 
-  /* GRID */
   --grid-line: 255 255 255;
+
+  /* typography */
+
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  --text-size-title: 2.75rem;
+  --text-size-subtitle: 1.25rem;
+  --text-size-body: 1rem;
+  --text-size-caption: 0.75rem;
+
+  --font-weight-title: 600;
+  --font-weight-subtitle: 500;
+  --font-weight-body: 400;
+
+  --line-tight: 1.1;
+  --line-normal: 1.5;
+
+  --tracking-wide: 0.05em;
+  --tracking-ultra: 0.3em;
+
+  /* spacing */
+
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 2rem;
+  --space-xl: 3rem;
+
+  /* radius */
+
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+
+  /* effects */
+
+  --blur-md: 12px;
+  --blur-lg: 16px;
+
+  --glow-sm: 0 0 20px rgba(var(--primary), 0.2);
+  --glow-md: 0 0 30px rgba(var(--primary), 0.3);
+  --glow-lg: 0 0 80px rgba(var(--primary), 0.8);
+
+  /* motion */
+
+  --transition-fast: 0.2s ease;
+  --transition-medium: 0.4s ease;
+  --transition-slow: 0.8s ease;
+
+  /* component tokens */
+
+  --btn-padding-y: 0.75rem;
+  --btn-padding-x: 1.25rem;
+
+  --input-padding-y: 0.5rem;
+  --input-padding-x: 1rem;
 }
 
-/* Base system styling */
+/* base */
+
 body {
   @apply bg-navy;
+  font-family: var(--font-sans);
   color: rgb(var(--text-main));
 }
 
-/* Smooth rendering */
 * {
   scroll-behavior: smooth;
 }
 
-/* Gradient Text */
+/* effects */
+
 .text-gradient {
   background: linear-gradient(
     90deg,
     rgb(var(--primary-soft)),
     rgb(var(--primary-alt))
   );
-
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-/* Glow */
 .glow {
-  box-shadow: 0 0 25px rgb(var(--primary), 0.4);
+  box-shadow: var(--glow-md);
 }
 
-/* System Flash */
 @keyframes systemFlash {
   0% {
     box-shadow: 0 0 0 rgba(var(--primary), 0);
     background-color: rgba(var(--primary), 0);
   }
   50% {
-    box-shadow: 0 0 80px rgba(var(--primary), 0.8);
+    box-shadow: var(--glow-lg);
     background-color: rgba(var(--primary), 0.08);
   }
   100% {
@@ -67,117 +121,127 @@ body {
 }
 
 .system-flash {
-  animation: systemFlash 0.6s ease-out;
+  animation: systemFlash 0.6s var(--transition-fast);
 }
 
-/* Grid Overlay */
+/* grid */
+
 .grid-overlay {
-  background-image: linear-gradient(
-      rgba(var(--grid-line), 0.03) 1px,
-      transparent 1px
-    ),
-    linear-gradient(
-      to right,
-      rgba(var(--grid-line), 0.03) 1px,
-      transparent 1px
-    );
+  background-image:
+    linear-gradient(rgba(var(--grid-line), 0.03) 1px, transparent 1px),
+    linear-gradient(to right, rgba(var(--grid-line), 0.03) 1px, transparent 1px);
   background-size: 40px 40px;
 }
 
-/* Semantic UI layer */
+/* semantic UI */
 
-/* surfaces */
 .bg-surface {
   background-color: rgb(var(--bg-surface) / 0.8);
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(var(--blur-md));
 }
 
-/* borders */
 .border-subtle {
   border: 1px solid rgb(var(--grid-line) / 0.1);
 }
 
-/* text */
 .text-muted {
   color: rgb(var(--text-muted));
 }
 
-/* inputs */
+/* components */
+
 .input-base {
   background-color: rgb(var(--bg-main) / 0.4);
   border: 1px solid rgb(var(--grid-line) / 0.1);
-  border-radius: 0.5rem;
-  padding: 0.5rem 1rem;
+  border-radius: var(--radius-md);
+  padding: var(--input-padding-y) var(--input-padding-x);
   outline: none;
   width: 100%;
-  transition: border 0.2s ease;
+  transition: border var(--transition-fast);
 }
 
 .input-base:focus {
   border-color: rgb(var(--primary));
 }
 
-/* buttons */
 .btn-primary {
   background-color: rgb(var(--primary));
   color: white;
-  border-radius: 0.5rem;
-  padding: 0.75rem 1.25rem;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border-radius: var(--radius-md);
+  padding: var(--btn-padding-y) var(--btn-padding-x);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
 }
 
 .btn-primary:hover {
   transform: scale(1.05);
-  box-shadow: 0 0 25px rgb(var(--primary), 0.4);
+  box-shadow: var(--glow-sm);
 }
 
-/* panels (cards/modals) */
 .panel {
   background-color: rgb(var(--bg-surface) / 0.9);
-  backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 0.75rem;
+  backdrop-filter: blur(var(--blur-lg));
+  border: 1px solid rgb(var(--grid-line) / 0.1);
+  border-radius: var(--radius-lg);
 }
 
-/* hover glow */
+.hover-glow {
+  transition: box-shadow var(--transition-fast);
+}
+
 .hover-glow:hover {
-  box-shadow: 0 0 30px rgb(var(--primary), 0.2);
+  box-shadow: var(--glow-sm);
 }
 
-/* Typography */
+/* typography */
 
-.text-primary {
-  color: rgb(var(--text-main));
-}
-
-.text-secondary {
-  color: rgb(var(--text-main) / 0.7);
-}
-
-.text-tertiary {
-  color: rgb(var(--text-main) / 0.5);
-}
-
-.text-disabled {
-  color: rgb(var(--text-main) / 0.3);
-}
-
-/* semantic sizes */
 .text-title {
-  font-size: 2.5rem;
-  font-weight: 600;
+  font-size: var(--text-size-title);
+  font-weight: var(--font-weight-title);
+  line-height: var(--line-tight);
 }
 
 .text-subtitle {
-  font-size: 1.25rem;
-  font-weight: 500;
+  font-size: var(--text-size-subtitle);
+  font-weight: var(--font-weight-subtitle);
+  line-height: var(--line-normal);
 }
 
 .text-body {
-  font-size: 1rem;
+  font-size: var(--text-size-body);
+  font-weight: var(--font-weight-body);
+  line-height: var(--line-normal);
 }
 
 .text-caption {
-  font-size: 0.75rem;
-  letter-spacing: 0.05em;
+  font-size: var(--text-size-caption);
+  letter-spacing: var(--tracking-wide);
+}
+
+/* semantic spacing */
+
+/* Vertical stacks */
+.stack-xs > * + * { margin-top: var(--space-xs); }
+.stack-sm > * + * { margin-top: var(--space-sm); }
+.stack-md > * + * { margin-top: var(--space-md); }
+.stack-lg > * + * { margin-top: var(--space-lg); }
+.stack-xl > * + * { margin-top: var(--space-xl); }
+
+/* Horizontal groups */
+.inline-xs > * + * { margin-left: var(--space-xs); }
+.inline-sm > * + * { margin-left: var(--space-sm); }
+.inline-md > * + * { margin-left: var(--space-md); }
+.inline-lg > * + * { margin-left: var(--space-lg); }
+
+/* Section spacing */
+.section {
+  padding-top: var(--space-xl);
+  padding-bottom: var(--space-xl);
+}
+
+/* Container */
+.container-system {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-left: var(--space-md);
+  padding-right: var(--space-md);
 }
