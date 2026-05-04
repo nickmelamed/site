@@ -31,7 +31,7 @@ export default function Home() {
   };
 
   return (
-    <main className="relative flex flex-col items-center justify-center min-h-screen text-center px-6 overflow-hidden">
+    <main className="bg-main relative flex flex-col items-center justify-center min-h-screen text-center px-6 overflow-hidden">
 
   <ParticleBackground />
   {transitioning && <SystemTransition />}

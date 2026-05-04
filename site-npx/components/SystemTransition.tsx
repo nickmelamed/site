@@ -9,7 +9,7 @@ export default function SystemTransition() {
       animate={{ opacity: 1 }}
       className="fixed inset-0 z-50 flex items-center justify-center overflow-hidden"
     >
-      <div className="absolute inset-0 bg-hero-gradient opacity-95" />
+      <div className="absolute inset-0 bg-[rgb(var(--bg-main))]" />
       <div className="absolute inset-0 bg-glow-radial animate-pulseGlow" />
       <div className="absolute inset-0 grid-overlay opacity-30" />
 
@@ -31,7 +31,7 @@ export default function SystemTransition() {
           initial={{ width: 0 }}
           animate={{ width: "200px" }}
           transition={{ duration: 1 }}
-          className="h-[2px] bg-electric mx-auto shadow-glow"
+          className="h-[2px] bg-accent mx-auto glow-sm"
         />
       </motion.div>
     </motion.div>

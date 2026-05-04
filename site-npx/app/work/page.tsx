@@ -14,9 +14,9 @@ export default function WorkWithMe() {
   });
 
   return (
-    <main className="relative min-h-screen bg-navy flex items-center justify-center px-6">
+    <main className="relative min-h-screen bg-main flex items-center justify-center px-6">
 
-      <div className="absolute inset-0 bg-hero-gradient opacity-80" />
+      <div className="absolute inset-0 bg-[rgb(var(--bg-main))]" />
       <div className="absolute inset-0 bg-glow-radial animate-pulseGlow" />
       <div className="absolute inset-0 grid-overlay opacity-20" />
 

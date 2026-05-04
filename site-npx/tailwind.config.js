@@ -4,53 +4,46 @@ module.exports = {
     "./app/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
-
-  safelist: [
-    "text-offwhite",
-    "text-muted",
-    "bg-navy",
-    "bg-charcoal",
-    "bg-electric",
-    "border-electric",
-    "text-electric",
-  ],
-
   theme: {
     extend: {
       colors: {
-        navy: "rgb(var(--bg-main) / <alpha-value>)",
-        charcoal: "rgb(var(--bg-surface) / <alpha-value>)",
+        /* PRIMARY */
+        primary: "rgb(var(--primary) / <alpha-value>)",
+        "primary-soft": "rgb(var(--primary-soft) / <alpha-value>)",
+        "primary-alt": "rgb(var(--primary-alt) / <alpha-value>)",
 
-        offwhite: "rgb(var(--text-main) / <alpha-value>)",
-        muted: "rgb(var(--text-muted) / <alpha-value>)",
+        /* BACKGROUND */
+        "bg-main": "rgb(var(--bg-main) / <alpha-value>)",
+        "bg-surface": "rgb(var(--bg-surface) / <alpha-value>)",
 
-        electric: "rgb(var(--primary) / <alpha-value>)",
+        /* TEXT */
+        "text-main": "rgb(var(--text-main) / <alpha-value>)",
+        "text-muted": "rgb(var(--text-muted) / <alpha-value>)",
+
+        /* GRID */
+        "grid-line": "rgb(var(--grid-line) / <alpha-value>)",
       },
 
       backgroundImage: {
-        "hero-gradient":
-          "linear-gradient(120deg, rgb(var(--bg-main)) 0%, rgb(var(--primary-alt)) 100%)",
-
         "glow-radial":
           "radial-gradient(circle at 50% 50%, rgba(var(--primary), 0.15), transparent 60%)",
       },
 
       boxShadow: {
-        glow: "0 0 25px rgba(var(--primary), 0.4)",
-      },
-
-      animation: {
-        pulseGlow: "pulseGlow 3s ease-in-out infinite",
+        glow: "0 0 30px rgba(var(--primary), 0.3)",
       },
 
       keyframes: {
         pulseGlow: {
-          "0%, 100%": { opacity: 0.5 },
-          "50%": { opacity: 1 },
+          "0%, 100%": { opacity: 0.4 },
+          "50%": { opacity: 0.8 },
         },
+      },
+
+      animation: {
+        pulseGlow: "pulseGlow 4s ease-in-out infinite",
       },
     },
   },
-
   plugins: [],
 };

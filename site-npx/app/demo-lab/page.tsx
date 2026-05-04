@@ -32,9 +32,9 @@ export default function ControlCenter() {
   };
 
   return (
-    <main className="relative min-h-screen bg-navy overflow-hidden">
+    <main className="relative min-h-screen text-primary overflow-hidden">
 
-      <div className="absolute inset-0 bg-hero-gradient opacity-80" />
+      <div className="absolute inset-0 bg-main" />
       <div className="absolute inset-0 bg-glow-radial animate-pulseGlow" />
       <div className="absolute inset-0 grid-overlay opacity-20" />
 
@@ -72,12 +72,12 @@ export default function ControlCenter() {
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.98 }}
               onClick={() => openDemo(demo.id as DemoKey)}
-              className="relative group cursor-pointer panel p-5 hover-glow stack-sm"
+              className="relative group cursor-pointer panel p-5 stack-sm hover:glow-sm transition"
             >
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition bg-gradient-to-r from-electric/10 to-electric/30 blur-xl" />
 
               <div className="flex justify-between text-caption">
-                <span className="text-green-400">● ACTIVE</span>
+                <span className="text-accent">● ACTIVE</span>
               </div>
 
               <h2 className="text-subtitle">{demo.name}</h2>
@@ -112,7 +112,7 @@ export default function ControlCenter() {
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-20 flex items-center justify-center px-6"
           >
-            <div className="absolute inset-0 bg-navy/90 backdrop-blur-xl" />
+            <div className="absolute inset-0 bg-main/90 backdrop-blur-xl" />
 
             <motion.div
               initial={{ scale: 0.95, y: 20 }}

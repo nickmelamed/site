@@ -35,9 +35,9 @@ export default function DemoRunner({
               <div
                 className={`px-3 py-2 rounded-lg text-body border transition ${
                   i === currentStep
-                    ? "border-electric text-electric shadow-glow"
+                    ? "border-accent text-accent glow-sm"
                     : i < currentStep
-                    ? "border-electric text-electric/70"
+                    ? "border-accent text-accent/70"
                     : "border-subtle text-muted"
                 }`}
               >
@@ -53,7 +53,7 @@ export default function DemoRunner({
       </div>
 
       {/* LOGS */}
-      <div className="panel p-4 font-mono text-caption text-electric h-40 overflow-y-auto">
+      <div className="panel p-4 font-mono text-caption text-accent h-40 overflow-y-auto">
         {logs.map((log, i) => (
           <div key={i}>{log}</div>
         ))}
@@ -80,7 +80,7 @@ export default function DemoRunner({
               <div className="text-caption text-secondary">
                 {m.name}
               </div>
-              <div className="text-subtitle text-electric">
+              <div className="text-subtitle text-accent">
                 {m.value.toFixed(2)}
               </div>
             </div>

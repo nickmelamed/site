@@ -24,9 +24,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       data-scroll-behavior="smooth"
       className={`${geistSans.variable} ${geistMono.variable}`}
     >
-      <body className="min-h-screen bg-navy text-primary relative overflow-x-hidden">
+      <body className="min-h-screen bg-main relative overflow-x-hidden">
 
-        <div className="absolute inset-0 bg-hero-gradient opacity-90" />
+        <div className="absolute inset-0 bg-[rgb(var(--bg-main))]" />
         <div className="absolute inset-0 bg-glow-radial animate-pulseGlow" />
         <div className="absolute inset-0 grid-overlay pointer-events-none" />
 
