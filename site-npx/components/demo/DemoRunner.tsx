@@ -18,16 +18,16 @@ export default function DemoRunner({
 
       {/* INPUT */}
       <div className="panel p-4">
-        <div className="text-xs text-muted mb-2">INPUT</div>
-        <h3 className="text-lg font-medium">{run.input.title}</h3>
-        <p className="text-muted text-sm mt-1">
+        <div className="text-caption text-secondary mb-2">INPUT</div>
+        <h3 className="text-subtitle">{run.input.title}</h3>
+        <p className="text-secondary text-body mt-1">
           {run.input.content}
         </p>
       </div>
 
       {/* PIPELINE */}
       <div>
-        <div className="text-xs text-muted mb-3">PIPELINE</div>
+        <div className="text-caption text-secondary mb-3">PIPELINE</div>
 
         <div className="flex flex-wrap gap-3 items-center">
           {run.steps.map((step, i) => (
@@ -53,7 +53,7 @@ export default function DemoRunner({
       </div>
 
       {/* LOGS */}
-      <div className="panel p-4 font-mono text-xs text-electric h-40 overflow-y-auto">
+      <div className="panel p-4 font-mono text-caption text-electric h-40 overflow-y-auto">
         {logs.map((log, i) => (
           <div key={i}>{log}</div>
         ))}
@@ -65,7 +65,7 @@ export default function DemoRunner({
           <div className="text-xs text-muted mb-2">OUTPUT</div>
 
           {run.output.type === "text" && (
-            <p className="text-offwhite/80 whitespace-pre-line">
+            <p className="text-secondary text-body whitespace-pre-line">
               {run.output.content}
             </p>
           )}
@@ -85,10 +85,10 @@ export default function DemoRunner({
         <div className="grid grid-cols-3 gap-4">
           {run.metrics.map((m, i) => (
             <div key={i} className="panel p-4 text-center">
-              <div className="text-xs text-muted">
+              <div className="text-caption text-secondary">
                 {m.name}
               </div>
-              <div className="text-electric text-lg">
+              <div className="text-subtitle text-electric">
                 {m.value.toFixed(2)}
               </div>
             </div>

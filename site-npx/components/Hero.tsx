@@ -11,7 +11,7 @@ export default function Hero() {
       {/* CONTENT */}
       <div className="relative z-10">
 
-        <h1 className="text-5xl md:text-7xl font-semibold tracking-tight leading-tight">
+        <h1 className="text-title leading-tight">
           
           <span className="text-gradient">
             <TypingHeadline />
@@ -19,7 +19,7 @@ export default function Hero() {
 
           <br />
 
-          <span className="text-offwhite/80">
+          <span className="text-secondary">
             Before They Act.
           </span>
         </h1>

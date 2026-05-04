@@ -47,7 +47,7 @@ export default function ControlCenter() {
 
         <button
           onClick={() => router.push("/")}
-          className="text-offwhite/50 hover:text-offwhite text-sm"
+          className="text-tertiary hover:text-primary text-body"
         >
           ← Back
         </button>
@@ -59,7 +59,7 @@ export default function ControlCenter() {
         animate={{ opacity: 1, y: 0 }}
         className="relative z-10 max-w-3xl mx-auto text-center mb-10"
       >
-        <p className="text-lg text-muted">
+        <p className="text-subtitle text-secondary">
           Choose a system to see how AI turns raw data into decisions.
         </p>
       </motion.div>
@@ -82,8 +82,8 @@ export default function ControlCenter() {
                 <span className="text-green-400">● ACTIVE</span>
               </div>
 
-              <h2 className="text-lg font-medium">{demo.name}</h2>
-              <p className="text-muted text-sm">{demo.description}</p>
+              <h2 className="text-subtitle">{demo.name}</h2>
+              <p className="text-secondary text-body">{demo.description}</p>
             </div>
           </motion.div>
         ))}
@@ -144,7 +144,7 @@ export default function ControlCenter() {
 
                   {/* SYSTEM FLOW */}
                   <div className="mb-8">
-                    <div className="text-xs text-muted mb-3">
+                    <div className="text-caption text-secondary mb-3">
                       SYSTEM FLOW
                     </div>
 
@@ -166,8 +166,8 @@ export default function ControlCenter() {
                   <div className="grid grid-cols-3 gap-4 mb-8">
                     {run.metrics.map((m, i) => (
                       <div key={i} className="panel p-4 text-center">
-                        <div className="text-xs text-muted">{m.name}</div>
-                        <div className="text-electric text-lg">
+                        <div className="text-caption text-secondary">{m.name}</div>
+                        <div className="text-subtitle text-electric">
                           {m.value.toFixed(2)}
                         </div>
                       </div>

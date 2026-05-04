@@ -31,88 +31,70 @@ export default function Home() {
   };
 
   return (
-    <main className="relative flex flex-col items-center justify-center min-h-screen text-center px-6 overflow-hidden text-offwhite">
+    <main className="relative flex flex-col items-center justify-center min-h-screen text-center px-6 overflow-hidden">
 
-      {/* PARTICLES */}
-      <ParticleBackground />
+  <ParticleBackground />
+  {transitioning && <SystemTransition />}
 
-      {/* TRANSITION OVERLAY */}
-      {transitioning && <SystemTransition />}
+  <div className="relative z-10">
 
-      <div className="relative z-10">
+    {/* HEADLINE */}
+    <h1 className="text-title leading-tight">
 
-        {/* HEADLINE */}
-        <h1 className="text-5xl md:text-7xl font-semibold tracking-tight leading-tight">
+      <span className="text-gradient">
+        <TypingHeadline onComplete={() => setTypingDone(true)} />
+      </span>
 
-          {/* Force gradient styling explicitly */}
-          <span className="text-gradient">
-            <TypingHeadline onComplete={() => setTypingDone(true)} />
-          </span>
+      <br />
 
-          <br />
+      <span className="text-secondary">
+        Before They Act
+      </span>
+    </h1>
 
-          <span className="text-offwhite">
-            Before They Act
-          </span>
-        </h1>
+    {/* UNLOCK */}
+    {typingDone && (
+      <div className="mt-8">
 
-        {/* UNLOCK FLOW */}
-        {typingDone && (
-          <div className="mt-8">
+        {!showInput ? (
+          <button onClick={() => setShowInput(true)} className="btn-primary text-body">
+            Unlock
+          </button>
+        ) : (
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="flex items-center gap-3 justify-center"
+          >
+            <input
+              type="password"
+              placeholder="Enter access key"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="input-base w-64 text-body"
+              onKeyDown={(e) => e.key === "Enter" && handleUnlock()}
+            />
 
-            {!showInput ? (
-              <button
-                onClick={() => setShowInput(true)}
-                className="btn-primary"
-              >
-                Unlock
-              </button>
-            ) : (
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="flex items-center gap-3 justify-center"
-              >
-                <input
-                  type="password"
-                  placeholder="Enter access key"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="input-base w-64"
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter") {
-                      handleUnlock();
-                    }
-                  }}
-                />
-
-                <button
-                  onClick={handleUnlock}
-                  className="btn-primary"
-                >
-                  Enter
-                </button>
-              </motion.div>
-            )}
-
-          </div>
+            <button onClick={handleUnlock} className="btn-primary text-body">
+              Enter
+            </button>
+          </motion.div>
         )}
 
-        {/* SUBTEXT */}
-        <motion.p
-          initial={{ opacity: 0, y: 10 }}
-          animate={
-            typingDone
-              ? { opacity: 1, y: 0 }
-              : { opacity: 0, y: 10 }
-          }
-          transition={{ duration: 0.6 }}
-          className="mt-8 max-w-xl text-muted text-lg"
-        >
-          Custom AI systems for real-world decisions
-        </motion.p>
-
       </div>
-    </main>
+    )}
+
+    {/* SUBTEXT */}
+    <motion.p
+      initial={{ opacity: 0, y: 10 }}
+      animate={typingDone ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.6 }}
+      className="mt-8 max-w-xl text-secondary text-body"
+    >
+      Custom AI systems for real-world decisions
+    </motion.p>
+
+  </div>
+</main>
   );
 }

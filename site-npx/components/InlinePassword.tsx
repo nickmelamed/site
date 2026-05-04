@@ -55,7 +55,7 @@ export default function InlinePassword({
       </div>
 
       {error && (
-        <p className="text-sm text-muted mt-2 text-center">
+        <p className="text-caption text-secondary mt-2 text-center">
           Invalid key
         </p>
       )}

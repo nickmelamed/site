@@ -19,11 +19,11 @@ export default function SystemTransition() {
         transition={{ delay: 0.2 }}
         className="relative z-10 text-center"
       >
-        <p className="text-xs tracking-[0.3em] mb-3 text-muted">
+        <p className="text-caption trackingf-[0.3em] mb-3 text-secondary">
           Initializing Intelligence...
         </p>
 
-        <p className="text-gradient text-lg font-medium tracking-wide">
+        <p className="text-gradient text-subtitle tracking-wide">
           Prepare to See the Magic of the Future
         </p>
 
