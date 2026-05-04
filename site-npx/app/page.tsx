@@ -39,16 +39,9 @@ export default function Home() {
   <div className="relative z-10">
 
     {/* HEADLINE */}
-    <h1 className="text-title leading-tight">
-
+    <h1 className="text-title leading-tight text-center">
       <span className="text-gradient">
         <TypingHeadline onComplete={() => setTypingDone(true)} />
-      </span>
-
-      <br />
-
-      <span className="text-secondary">
-        Before They Act
       </span>
     </h1>
 

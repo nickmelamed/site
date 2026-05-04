@@ -7,32 +7,58 @@ export default function TypingHeadline({
 }: {
   onComplete?: () => void;
 }) {
-  const fullText = "Systems That Think";
-  const [text, setText] = useState("");
-  const [done, setDone] = useState(false);
+  const lines = [
+    "Systems That Think",
+    "Before",
+    "They Act",
+  ];
+
+  const [visibleLines, setVisibleLines] = useState<string[]>([]);
+  const [currentText, setCurrentText] = useState("");
+  const [lineIndex, setLineIndex] = useState(0);
+  const [charIndex, setCharIndex] = useState(0);
 
   useEffect(() => {
-    let i = 0;
+    if (lineIndex >= lines.length) {
+      onComplete?.();
+      return;
+    }
 
-    const interval = setInterval(() => {
-      setText(fullText.slice(0, i + 1));
-      i++;
+    const currentLine = lines[lineIndex];
 
-      if (i === fullText.length) {
-        clearInterval(interval);
-        setDone(true);
+    // typing characters
+    if (charIndex < currentLine.length) {
+      const timeout = setTimeout(() => {
+        setCurrentText(currentLine.slice(0, charIndex + 1));
+        setCharIndex(charIndex + 1);
+      }, 40); // typing speed
 
-        setTimeout(() => onComplete?.(), 400);
-      }
-    }, 40);
+      return () => clearTimeout(timeout);
+    }
 
-    return () => clearInterval(interval);
-  }, []);
+    // pause after full line typed
+    const pause = setTimeout(() => {
+      setVisibleLines((prev) => [...prev, currentLine]);
+      setCurrentText("");
+      setCharIndex(0);
+      setLineIndex(lineIndex + 1);
+    }, 500); // pause between lines
+
+    return () => clearTimeout(pause);
+  }, [charIndex, lineIndex]);
 
   return (
-    <>
-      {text}
-      {!done && <span className="opacity-60 animate-pulse">|</span>}
-    </>
+    <span className="whitespace-pre-line">
+      {visibleLines.map((line, i) => (
+        <div key={i}>{line}</div>
+      ))}
+
+      {lineIndex < lines.length && (
+        <div>
+          {currentText}
+          <span className="opacity-60 animate-pulse">|</span>
+        </div>
+      )}
+    </span>
   );
 }

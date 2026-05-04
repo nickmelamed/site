@@ -92,13 +92,15 @@ body {
 
 .text-gradient {
   background: linear-gradient(
-    90deg,
-    rgb(var(--primary-soft)),
-    rgb(var(--primary-alt))
+    to bottom,
+    rgb(var(--primary)) 0%,
+    rgb(var(--primary-soft)) 45%,
+    rgb(var(--primary-alt)) 100%
   );
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  display: inline-block;
 }
 
 .glow {
