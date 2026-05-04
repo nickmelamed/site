@@ -104,6 +104,22 @@ body {
   box-shadow: var(--glow-md);
 }
 
+.gradient-accent {
+  background: linear-gradient(
+    to right,
+    rgba(var(--primary), 0.1),
+    rgba(var(--primary), 0.3)
+  );
+}
+
+.gradient-accent-strong {
+  background: linear-gradient(
+    to right,
+    rgba(var(--primary), 0.2),
+    rgba(var(--primary), 0.6)
+  );
+}
+
 @keyframes systemFlash {
   0% { background-color: transparent; }
   50% { background-color: rgba(var(--primary), 0.08); }
@@ -223,8 +239,6 @@ body {
 }
 
 /* semantic colors */
-
-/* semantic colors (fix missing ones) */
 
 .text-primary {
   color: rgb(var(--text-main));

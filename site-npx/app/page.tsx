@@ -57,7 +57,7 @@ export default function Home() {
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="flex items-center gap-3 justify-center"
+            className="flex items-center inline-sm justify-center"
           >
             <input
               type="password"

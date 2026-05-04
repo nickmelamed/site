@@ -74,7 +74,7 @@ export default function DemoRunner({
 
       {/* METRICS */}
       {complete && (
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-3 inline-md">
           {run.metrics.map((m, i) => (
             <div key={i} className="panel p-4 text-center stack-xs">
               <div className="text-caption text-secondary">

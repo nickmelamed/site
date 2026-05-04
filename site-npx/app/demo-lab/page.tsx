@@ -65,7 +65,7 @@ export default function ControlCenter() {
         </motion.div>
 
         {/* GRID */}
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-3 inline-lg">
           {demos.map(([key, demo]) => (
             <motion.div
               key={key}
@@ -74,7 +74,12 @@ export default function ControlCenter() {
               onClick={() => openDemo(demo.id as DemoKey)}
               className="relative group cursor-pointer panel p-5 stack-sm hover:glow-sm transition"
             >
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition bg-gradient-to-r from-electric/10 to-electric/30 blur-xl" />
+              <div
+                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition blur-xl"
+                style={{
+                  background: "linear-gradient(to right, rgba(var(--primary), 0.1), rgba(var(--primary), 0.3))"
+                }}
+              />
 
               <div className="flex justify-between text-caption">
                 <span className="text-accent">● ACTIVE</span>

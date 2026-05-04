@@ -4,6 +4,7 @@ module.exports = {
     "./app/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
+
   theme: {
     extend: {
       colors: {
@@ -14,36 +15,39 @@ module.exports = {
 
         /* BACKGROUND */
         "bg-main": "rgb(var(--bg-main) / <alpha-value>)",
-        "bg-surface": "rgb(var(--bg-surface) / <alpha-value>)",
+        surface: "rgb(var(--bg-surface) / <alpha-value>)",
 
         /* TEXT */
-        "text-main": "rgb(var(--text-main) / <alpha-value>)",
-        "text-muted": "rgb(var(--text-muted) / <alpha-value>)",
+        text: "rgb(var(--text-main) / <alpha-value>)",
+        muted: "rgb(var(--text-muted) / <alpha-value>)",
 
         /* GRID */
-        "grid-line": "rgb(var(--grid-line) / <alpha-value>)",
+        grid: "rgb(var(--grid-line) / <alpha-value>)",
       },
 
-      backgroundImage: {
-        "glow-radial":
-          "radial-gradient(circle at 50% 50%, rgba(var(--primary), 0.15), transparent 60%)",
+      fontFamily: {
+        sans: "var(--font-sans)",
+        mono: "var(--font-mono)",
       },
 
-      boxShadow: {
-        glow: "0 0 30px rgba(var(--primary), 0.3)",
+      borderRadius: {
+        sm: "var(--radius-sm)",
+        md: "var(--radius-md)",
+        lg: "var(--radius-lg)",
       },
 
-      keyframes: {
-        pulseGlow: {
-          "0%, 100%": { opacity: 0.4 },
-          "50%": { opacity: 0.8 },
-        },
+      transitionTimingFunction: {
+        fast: "var(--transition-fast)",
+        medium: "var(--transition-medium)",
+        slow: "var(--transition-slow)",
       },
 
-      animation: {
-        pulseGlow: "pulseGlow 4s ease-in-out infinite",
+      backdropBlur: {
+        md: "var(--blur-md)",
+        lg: "var(--blur-lg)",
       },
     },
   },
+
   plugins: [],
 };
