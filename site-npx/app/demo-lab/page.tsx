@@ -115,7 +115,7 @@ export default function ControlCenter() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-20 flex items-center justify-center px-6"
+            className="fixed inset-0 z-20 inline-row-center px-6"
           >
             <div className="absolute inset-0 bg-main/90 backdrop-blur-xl" />
 

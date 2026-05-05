@@ -28,7 +28,7 @@ export default function InlinePassword({
         visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
       }`}
     >
-      <div className="flex items-center justify-center inline-md">
+      <div className="inline-row-center inline-md">
 
         <input
           type="password"

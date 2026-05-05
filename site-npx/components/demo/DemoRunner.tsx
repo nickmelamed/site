@@ -31,7 +31,7 @@ export default function DemoRunner({
 
         <div className="inline-row inline-sm flex-wrap items-center">
           {run.steps.map((step, i) => (
-            <div key={i} className="flex items-center inline-sm">
+            <div key={i} className="inline-row inline-sm">
               <div
                 className={`px-3 py-2 rounded-lg text-body border transition ${
                   i === currentStep

@@ -7,7 +7,7 @@ export default function SystemTransition() {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="fixed inset-0 z-50 flex items-center justify-center overflow-hidden"
+      className="fixed inset-0 z-50 inline-row-center overflow-hidden"
     >
       <div className="absolute inset-0 bg-[rgb(var(--bg-main))]" />
       <div className="absolute inset-0 bg-glow-radial animate-pulseGlow" />
