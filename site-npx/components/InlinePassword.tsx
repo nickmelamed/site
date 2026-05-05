@@ -42,7 +42,7 @@ export default function InlinePassword({
           className="input-base w-64 text-body"
         />
 
-        <button onClick={handleSubmit} className="btn-primary text-body">
+        <button onClick={handleSubmit} className="btn btn-primary">
           Enter
         </button>
       </div>

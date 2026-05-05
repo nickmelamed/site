@@ -50,25 +50,25 @@ export default function Home() {
       <div className="mt-8">
 
         {!showInput ? (
-          <button onClick={() => setShowInput(true)} className="btn-primary text-body">
+          <button onClick={() => setShowInput(true)} className="btn btn-primary">
             Unlock
           </button>
         ) : (
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="flex items-center inline-sm justify-center"
+            className="input-group centered"
           >
             <input
               type="password"
               placeholder="Enter access key"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="input-base w-64 text-body"
+              className="input-base input-md text-body"
               onKeyDown={(e) => e.key === "Enter" && handleUnlock()}
             />
 
-            <button onClick={handleUnlock} className="btn-primary text-body">
+            <button onClick={handleUnlock} className="btn btn-primary">
               Enter
             </button>
           </motion.div>

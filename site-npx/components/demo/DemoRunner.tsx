@@ -17,7 +17,7 @@ export default function DemoRunner({
     <div className="stack-lg">
 
       {/* INPUT */}
-      <div className="panel p-4 stack-sm">
+      <div className="panel-base panel-sm stack-sm">
         <div className="text-caption text-secondary">INPUT</div>
         <h3 className="text-subtitle">{run.input.title}</h3>
         <p className="text-secondary text-body">
@@ -29,7 +29,7 @@ export default function DemoRunner({
       <div className="stack-sm">
         <div className="text-caption text-secondary">PIPELINE</div>
 
-        <div className="flex flex-wrap inline-sm items-center">
+        <div className="inline-row inline-sm flex-wrap items-center">
           {run.steps.map((step, i) => (
             <div key={i} className="flex items-center inline-sm">
               <div
@@ -61,7 +61,7 @@ export default function DemoRunner({
 
       {/* OUTPUT */}
       {complete && (
-        <div className="panel p-4 stack-sm">
+        <div className="panel-base panel-sm stack-sm">
           <div className="text-caption text-secondary">OUTPUT</div>
 
           {run.output.type === "text" && (

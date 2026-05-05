@@ -3,7 +3,7 @@ import TypingHeadline from "./TypingHeadline";
 
 export default function Hero() {
   return (
-    <main className="relative flex flex-col items-center justify-center min-h-screen text-center px-6 overflow-hidden">
+    <main className="relative screen-center text-center overflow-hidden">
 
       <ParticleBackground />
 
@@ -22,7 +22,7 @@ export default function Hero() {
           </span>
         </h1>
 
-        <button className="btn-primary text-body">
+        <button className="btn btn-primary">
           Enter Demo Lab
         </button>
 

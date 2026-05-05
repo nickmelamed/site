@@ -169,19 +169,6 @@ body {
   border-color: rgb(var(--primary));
 }
 
-.btn-primary {
-  background-color: rgb(var(--primary));
-  color: white;
-  border-radius: var(--radius-md);
-  padding: var(--btn-padding-y) var(--btn-padding-x);
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
-}
-
-.btn-primary:hover {
-  transform: scale(1.05);
-  box-shadow: var(--glow-sm);
-}
-
 .panel {
   background-color: rgb(var(--bg-surface) / 0.9);
   backdrop-filter: blur(var(--blur-lg));
@@ -276,4 +263,144 @@ body {
 
 .glow-lg {
   box-shadow: var(--glow-lg);
+}
+
+/* ========================= */
+/* COMPONENT LAYOUT SYSTEM */
+/* ========================= */
+
+/* Row layout (replaces flex inline combos) */
+.inline-row {
+  display: flex;
+  align-items: center;
+}
+
+.inline-row-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Vertical center layout */
+.centered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Fullscreen center (used in pages) */
+.screen-center {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: var(--space-md);
+  padding-right: var(--space-md);
+}
+
+/* ========================= */
+/* BUTTON SYSTEM */
+/* ========================= */
+
+/* ========================= */
+/* BUTTON SYSTEM (FIXED) */
+/* ========================= */
+
+.btn {
+  display: inline-flex;              /* 🔥 critical */
+  align-items: center;
+  justify-content: center;
+
+  width: auto;                      /* 🔥 prevents stretching */
+  white-space: nowrap;
+
+  border-radius: var(--radius-md);
+  padding: var(--btn-padding-y) var(--btn-padding-x);
+
+  font-size: var(--text-size-body);
+
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+/* Primary (unchanged visually) */
+.btn-primary {
+  background-color: rgb(var(--primary));
+  color: white;
+}
+
+.btn-primary:hover {
+  transform: scale(1.05);
+  box-shadow: var(--glow-sm);
+}
+
+/* FULL WIDTH ONLY WHEN EXPLICIT */
+.btn-full {
+  width: 100%;
+  display: flex;
+}
+
+/* CTA = SAME LOOK, DIFFERENT INTENT */
+.btn-cta {
+  font-weight: 500;
+}
+
+/* ========================= */
+/* INPUT GROUP SYSTEM */
+/* ========================= */
+
+.input-group {
+  display: flex;
+  align-items: center;
+}
+
+.input-group > * + * {
+  margin-left: var(--space-sm);
+}
+
+/* fixed width input (replaces w-64) */
+.input-md {
+  width: 16rem;
+}
+
+/* textarea sizing */
+.textarea-md {
+  height: 7rem;
+}
+
+/* ========================= */
+/* PANEL SYSTEM */
+/* ========================= */
+
+.panel-base {
+  background-color: rgb(var(--bg-surface) / 0.9);
+  backdrop-filter: blur(var(--blur-lg));
+  border: 1px solid rgb(var(--grid-line) / 0.1);
+  border-radius: var(--radius-lg);
+}
+
+/* padding variants */
+.panel-sm { padding: var(--space-md); }
+.panel-md { padding: var(--space-lg); }
+.panel-lg { padding: calc(var(--space-lg) + var(--space-sm)); }
+
+/* ========================= */
+/* GRID SYSTEM */
+/* ========================= */
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+}
+
+/* responsive grid */
+.grid-responsive {
+  display: grid;
+  gap: var(--space-md);
+}
+
+@media (min-width: 768px) {
+  .grid-responsive {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }

@@ -65,7 +65,7 @@ export default function ControlCenter() {
         </motion.div>
 
         {/* GRID */}
-        <div className="grid md:grid-cols-3 inline-lg">
+        <div className="grid-responsive inline-lg">
           {demos.map(([key, demo]) => (
             <motion.div
               key={key}
@@ -99,7 +99,7 @@ export default function ControlCenter() {
 
           <button
             onClick={() => router.push("/work")}
-            className="btn-primary text-body"
+            className="btn btn-primary btn-cta"
           >
             Work With Me →
           </button>
@@ -148,7 +148,7 @@ export default function ControlCenter() {
                         setMode("run");
                       }, 400);
                     }}
-                    className="btn-primary text-body"
+                    className="btn btn-primary"
                   >
                     Run Demo →
                   </button>

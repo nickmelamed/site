@@ -68,10 +68,10 @@ export default function WorkWithMe() {
             onChange={(e) =>
               setForm({ ...form, message: e.target.value })
             }
-            className="input-base text-body h-28"
+            className="input-base textarea-md text-body"
           />
 
-          <button className="btn-primary w-full text-body">
+          <button className="btn btn-primary btn-full">
             Send Message
           </button>
         </div>
