@@ -169,13 +169,6 @@ body {
   border-color: rgb(var(--primary));
 }
 
-.panel {
-  background-color: rgb(var(--bg-surface) / 0.9);
-  backdrop-filter: blur(var(--blur-lg));
-  border: 1px solid rgb(var(--grid-line) / 0.1);
-  border-radius: var(--radius-lg);
-}
-
 /* typography */
 
 .text-title {
@@ -210,6 +203,16 @@ body {
 .inline-sm > * + * { margin-left: var(--space-sm); }
 .inline-md > * + * { margin-left: var(--space-md); }
 .inline-lg > * + * { margin-left: var(--space-lg); }
+
+/* WIDTH SYSTEM */
+.w-sm { width: 12rem; }
+.w-md { width: 16rem; }
+.w-lg { width: 24rem; }
+
+.container-sm { max-width: 400px; }
+.container-md { max-width: 600px; }
+.container-lg { max-width: 900px; }
+.container-xl { max-width: 1200px; }
 
 /* Section spacing */
 .section {

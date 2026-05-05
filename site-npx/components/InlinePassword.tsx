@@ -39,7 +39,7 @@ export default function InlinePassword({
             setError(false);
           }}
           onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
-          className="input-base w-64 text-body"
+          className="input-base input-md text-body"
         />
 
         <button onClick={handleSubmit} className="btn btn-primary">

@@ -53,7 +53,7 @@ export default function DemoRunner({
       </div>
 
       {/* LOGS */}
-      <div className="panel p-4 font-mono text-caption text-accent h-40 overflow-y-auto">
+      <div className="panel-base panel-sm font-mono text-caption text-accent h-40 overflow-y-auto">
         {logs.map((log, i) => (
           <div key={i}>{log}</div>
         ))}
@@ -76,7 +76,7 @@ export default function DemoRunner({
       {complete && (
         <div className="grid grid-cols-3 inline-md">
           {run.metrics.map((m, i) => (
-            <div key={i} className="panel p-4 text-center stack-xs">
+            <div key={i} className="panel-base panel-sm text-center stack-xs">
               <div className="text-caption text-secondary">
                 {m.name}
               </div>

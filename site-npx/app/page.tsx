@@ -82,7 +82,7 @@ export default function Home() {
       initial={{ opacity: 0, y: 10 }}
       animate={typingDone ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.6 }}
-      className="mt-8 max-w-xl text-secondary text-body"
+      className="mt-8 container-xl text-secondary text-body"
     >
       Custom AI systems for real-world decisions
     </motion.p>

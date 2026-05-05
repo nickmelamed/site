@@ -59,7 +59,7 @@ export default function ControlCenter() {
           transition={{ duration: 0.4 }}
           className="text-center"
         >
-          <p className="text-subtitle text-secondary max-w-2xl mx-auto">
+          <p className="text-subtitle text-secondary container-xl mx-auto">
             Choose a system to see how AI turns raw data into decisions.
           </p>
         </motion.div>
@@ -72,7 +72,7 @@ export default function ControlCenter() {
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.98 }}
               onClick={() => openDemo(demo.id as DemoKey)}
-              className="relative group cursor-pointer panel p-5 stack-sm hover:glow-sm transition"
+              className="relative group cursor-pointer panel-base panel-md stack-sm hover:glow-sm transition"
             >
               <div
                 className="absolute inset-0 opacity-0 group-hover:opacity-100 transition blur-xl"
@@ -123,7 +123,7 @@ export default function ControlCenter() {
               initial={{ scale: 0.95, y: 20 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.95, y: 20 }}
-              className="relative z-10 max-w-4xl w-full panel p-8 stack-lg"
+              className="relative z-10 container-lg w-full panel-base panel-lg stack-lg"
             >
               <div className="flex justify-between items-center">
                 <h2 className="text-title text-gradient">{run.name}</h2>

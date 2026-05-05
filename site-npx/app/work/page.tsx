@@ -23,7 +23,7 @@ export default function WorkWithMe() {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="relative z-10 w-full max-w-lg panel p-8 stack-lg"
+        className="relative z-10 w-full container-md panel-base panel-lg stack-lg"
       >
 
         <div className="flex justify-between items-center">
